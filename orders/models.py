@@ -1,9 +1,16 @@
 """
 Orders class
 """
+from typing import Dict
+
 from database.core import db
 from datetime import datetime
 import uuid
+
+orders_products = db.Table('Orders_Products',
+                           db.Column('order_id', db.Integer, db.ForeignKey('Orders.id')),
+                           db.Column('product_id', db.Integer, db.ForeignKey('Products.id'))
+                           )
 
 
 class Orders(db.Model):
@@ -20,7 +27,7 @@ class Orders(db.Model):
     post_index = db.Column(db.String(50))
     status = db.Column(db.String(50), default='Created')
     create_date = db.Column(db.DateTime(), default=datetime.now)
-    products = db.relationship('Products', backref='orders', lazy=True)  # Change
+    products = db.relationship('Products', secondary=orders_products, back_populates='orders')
 
     def set_uuid(self, uuid_):
         """
@@ -36,7 +43,11 @@ class Orders(db.Model):
         """
         self.user = user_
 
-    def serialize(self):
+    def serialize(self) -> Dict:
+        """
+        Serialize Model
+        :return: Dict
+        """
         return {
             'id': self.id,
             'uuid': self.uuid,

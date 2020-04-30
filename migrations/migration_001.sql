@@ -74,3 +74,18 @@ CREATE TABLE Rates(
     rate INT UNSIGNED NOT NULL DEFAULT 0
 ) CHARACTER SET utf8;
 
+CREATE TABLE Orders_Products(
+    order_id INT UNSIGNED,
+    product_id INT UNSIGNED,
+    CONSTRAINT `fk_order_products_id` FOREIGN KEY (order_id) REFERENCES Orders (id) ON DELETE CASCADE,
+    CONSTRAINT `fk_product_orders` FOREIGN KEY (product_id) REFERENCES Products (id) ON DELETE CASCADE
+)
+CHARACTER SET utf8;
+
+CREATE TABLE Products_Tags(
+    product_id INT UNSIGNED,
+    tag_id INT UNSIGNED,
+    CONSTRAINT `fk_product_tags_id` FOREIGN KEY (product_id) REFERENCES Products (id) ON DELETE CASCADE,
+    CONSTRAINT `fk_tag_products` FOREIGN KEY (tag_id) REFERENCES Tags (id) ON DELETE CASCADE
+)
+CHARACTER SET utf8;

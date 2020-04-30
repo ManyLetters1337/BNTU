@@ -1,6 +1,8 @@
 """
 Comments class
 """
+from typing import Dict
+
 from database.core import db
 from datetime import datetime
 import uuid
@@ -54,7 +56,11 @@ class Comments(db.Model):
         """
         self.rate -= value
 
-    def serialize(self):
+    def serialize(self) -> Dict:
+        """
+        Serialize Model
+        :return: Dict
+        """
         return {
             'id': self.id,
             'uuid': self.uuid,

@@ -1,20 +1,22 @@
 """
-Categories class
+Tags Models
 """
-from database.core import db
 from typing import Dict
+
+from database.core import db
+from products.models import products_tags
 import uuid
 
 
-class Categories(db.Model):
+class Tags(db.Model):
     """
-    Model of Categories
+    Model of Tags
     """
-    _tablename_ = 'Categories'
+    __tablename__ = 'Tags'
     id = db.Column(db.Integer(), primary_key=True)
     uuid = db.Column(db.String(50), default=uuid.uuid4().__str__(), unique=True)
-    name = db.Column(db.String(100), unique=True)
-    products = db.relationship('Products', backref='categories', lazy=True)
+    name = db.Column(db.String(50), unique=True)
+    products = db.relationship('Products', secondary=products_tags, back_populates='tags')
 
     def set_uuid(self, uuid_):
         """
