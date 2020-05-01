@@ -19,7 +19,7 @@ class Comments(db.Model):
     product_id = db.Column(db.Integer(), db.ForeignKey('products.id'))
     text = db.Column(db.String(300), nullable=True)
     rate = db.Column(db.Integer(), default=0)
-    create_date = db.Column(db.DateTime(), default=datetime.now)
+    create_date = db.Column(db.DateTime(), default=datetime.now())
 
     def set_uuid(self, uuid_):
         """

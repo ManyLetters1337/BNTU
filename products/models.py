@@ -24,7 +24,7 @@ class Products(db.Model):
     name = db.Column(db.String(100), nullable=False)
     category_id = db.Column(db.Integer(), db.ForeignKey('Categories.id'))
     price = db.Column(db.DECIMAL(10, 2), nullable=False)
-    description = db.Column(db.String(100), nullable=True)
+    description = db.Column(db.String(100), nullable=False)
     create_date = db.Column(db.DateTime(), default=datetime.now)
     update_date = db.Column(db.DateTime())
     users = db.relationship('Users', backref='products', lazy=True)

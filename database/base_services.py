@@ -9,7 +9,7 @@ from typing import Union
 import uuid
 
 
-class BaseDBService:
+class BaseDBServices:
     model = None
 
     def get_by_id(self, id_: int) -> db.Model:
