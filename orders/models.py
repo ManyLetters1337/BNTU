@@ -8,8 +8,8 @@ from datetime import datetime
 import uuid
 
 orders_products = db.Table('Orders_Products',
-                           db.Column('order_id', db.Integer, db.ForeignKey('Orders.id')),
-                           db.Column('product_id', db.Integer, db.ForeignKey('Products.id'))
+                           db.Column('order_id', db.Integer, db.ForeignKey('orders.id')),
+                           db.Column('product_id', db.Integer, db.ForeignKey('products.id'))
                            )
 
 
@@ -17,7 +17,7 @@ class Orders(db.Model):
     """
     Model of Orders
     """
-    __tablename__ = 'Orders'
+    __tablename__ = 'orders'
     id = db.Column(db.Integer(), primary_key=True)
     uuid = db.Column(db.String(50), default=uuid.uuid4().__str__(), unique=True)
     user_id = db.Column(db.Integer(), db.ForeignKey('users.id'))

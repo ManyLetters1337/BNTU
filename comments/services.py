@@ -16,7 +16,7 @@ class CommentsDBServices(BaseDBServices):
 
     model = Comments
 
-    def create(self, user: User, product: Products, text: str) -> Comments:
+    def create(self, user: 'User', product: 'Products', text: str) -> Comments:
         """
         Create Comments Instance
         @return: Comments Instance

@@ -12,7 +12,7 @@ class Tags(db.Model):
     """
     Model of Tags
     """
-    __tablename__ = 'Tags'
+    __tablename__ = 'tags'
     id = db.Column(db.Integer(), primary_key=True)
     uuid = db.Column(db.String(50), default=uuid.uuid4().__str__(), unique=True)
     name = db.Column(db.String(50), unique=True)

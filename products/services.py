@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 class ProductsDBService(BaseDBServices):
     model = Products
 
-    def create(self, category: Categories, **kwargs) -> Products:
+    def create(self, category: 'Categories', **kwargs) -> Products:
         """
         Create Product Instance
         @return: Product Instance
@@ -28,7 +28,7 @@ class ProductsDBService(BaseDBServices):
 
         return product
 
-    def update(self, product: Products, **kwargs) -> Products:
+    def update(self, product: 'Products', **kwargs) -> Products:
         """
         Update Product Instance
         :param product: Product instance
@@ -48,7 +48,7 @@ class ProductsDBService(BaseDBServices):
 
         return product
 
-    def add_tags(self, product: Products, tags: List) -> Products:
+    def add_tags(self, product: 'Products', tags: List) -> Products:
         """
         Add Tags to Product
         :param product: Product Instance
@@ -62,7 +62,7 @@ class ProductsDBService(BaseDBServices):
 
         return product
 
-    def delete_tag(self, product: Products, tag: Tags) -> Products:
+    def delete_tag(self, product: 'Products', tag: 'Tags') -> Products:
         """
         Delete Tag from Product
         :param product: Product Instance
@@ -75,7 +75,7 @@ class ProductsDBService(BaseDBServices):
 
         return product
 
-    def add_order(self, product: Products, order: Orders) -> Products:
+    def add_order(self, product: 'Products', order: 'Orders') -> Products:
         """
         Add Order To Product
         :param product: Product Instance
@@ -88,7 +88,7 @@ class ProductsDBService(BaseDBServices):
 
         return product
 
-    def delete_order(self, product: Products, order: Orders) -> Products:
+    def delete_order(self, product: 'Products', order: 'Orders') -> Products:
         """
         Delete Order from Product
         :param product: Product Instance

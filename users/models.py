@@ -7,17 +7,18 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash
 from database.core import db
 from time import time
-from config import secret_key   # add config file or secret_key
+from config import secret_key
 from datetime import date
+from products.models import products_users, rates_users
 import jwt
 import uuid
 
 
-class User(db.Model, UserMixin):
+class Users(db.Model, UserMixin):
     """
     Model of User
     """
-    __tablename__ = 'Users'
+    __tablename__ = 'users'
     id = db.Column(db.Integer(), primary_key=True)
     uuid = db.Column(db.String(50), default=uuid.uuid4().__str__(), unique=True)
     email = db.Column(db.String(100), nullable=False, unique=True)
@@ -30,6 +31,8 @@ class User(db.Model, UserMixin):
     about = db.Column(db.Text(), nullable=True)
     role = db.Column(db.String(50), default='user')
     orders = db.relationship('Orders', backref='user', lazy=True)
+    products = db.relationship('Products', secondary=products_users, back_populates='users')
+    rates = db.relationship('Rates', secondary=rates_users, back_populates='users')
 
     def set_uuid(self, uuid_: str):
         """

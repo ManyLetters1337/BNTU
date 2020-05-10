@@ -10,7 +10,7 @@ class Categories(db.Model):
     """
     Model of Categories
     """
-    _tablename_ = 'Categories'
+    _tablename_ = 'categories'
     id = db.Column(db.Integer(), primary_key=True)
     uuid = db.Column(db.String(50), default=uuid.uuid4().__str__(), unique=True)
     name = db.Column(db.String(100), unique=True)

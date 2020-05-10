@@ -8,26 +8,31 @@ from datetime import datetime
 from orders.models import orders_products
 import uuid
 
-products_tags = db.Table('Products_Tags',
-                         db.Column('product_id', db.Integer, db.ForeignKey('Products.id')),
-                         db.Column('tag_id', db.Integer, db.ForeignKey('Tags.id')),
+products_tags = db.Table('products_tags',
+                         db.Column('product_id', db.Integer, db.ForeignKey('products.id')),
+                         db.Column('tag_id', db.Integer, db.ForeignKey('tags.id')),
                          )
+
+products_users = db.Table('products_users',
+                          db.Column('product_id', db.Integer, db.ForeignKey('products.id')),
+                          db.Column('user_id', db.Integer, db.ForeignKey('users.id'))
+                          )
 
 
 class Products(db.Model):
     """
     Model of Products
     """
-    __tablename__ = 'Products'
+    __tablename__ = 'products'
     id = db.Column(db.Integer(), primary_key=True)
     uuid = db.Column(db.String(50), default=uuid.uuid4().__str__(), unique=True)
     name = db.Column(db.String(100), nullable=False)
-    category_id = db.Column(db.Integer(), db.ForeignKey('Categories.id'))
+    category_id = db.Column(db.Integer(), db.ForeignKey('categories.id'))
     price = db.Column(db.DECIMAL(10, 2), nullable=False)
     description = db.Column(db.String(100), nullable=False)
     create_date = db.Column(db.DateTime(), default=datetime.now)
     update_date = db.Column(db.DateTime())
-    users = db.relationship('Users', backref='products', lazy=True)
+    users = db.relationship('Users', secondary=products_users, back_populates='products')
     orders = db.relationship('Orders', secondary=orders_products, back_populates='products')
     tags = db.relationship('Tags', secondary=products_tags, back_populates='products')
 
@@ -62,14 +67,21 @@ class Products(db.Model):
         }
 
 
-class Rate(db.Model):
+rates_users = db.Table('rates_users',
+                       db.Column('rate_id', db.Integer, db.ForeignKey('rates.id')),
+                       db.Column('user_id', db.Integer, db.ForeignKey('users.id'))
+                       )
+
+
+class Rates(db.Model):
     """
     Model of Product Rate
     """
-    __tablename__ = 'Rates'
-    product_id = db.Column(db.Integer(), db.ForeignKey('Products.id'))
+    __tablename__ = 'rates'
+    id = db.Column(db.Integer(), primary_key=True)
+    product_id = db.Column(db.Integer(), db.ForeignKey('products.id'))
     rate = db.Column(db.Integer(), default=0)
-    users = db.relationship('Users', backref='rate', lazy=True)
+    users = db.relationship('Users', secondary=rates_users, back_populates='rates')
 
     def get_rate(self):
         """

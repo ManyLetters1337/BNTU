@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/">
+    {% block head %}
+    {% endblock %}
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../static/style.css">
+
+<!--    <script src="../../static/plugins/Chart.min.js"></script>-->
+<!--    <script src="../../static/plugins/jquery.min.js"></script>-->
+<!--    <script src="../../static/plugins/bootstrap.min.js"></script>-->
+<!--    <script src="../../static/plugins/angular.js"></script>-->
+<!--    <script src="https://unpkg.com/@uirouter/angularjs@1.0.19/release/angular-ui-router.min.js"></script>-->
+<!--    <script src="/static/angular/app.js"></script>-->
+<!--    <script src="/static/angular/users/users.js"></script>-->
+<!--    <script src="/static/angular/projects/projects.js"></script>-->
+<!--    <script src="/static/angular/constansApiUrls.js"></script>-->
+<!--    <script src="/static/angular/users/user/user.js"></script>-->
+<!--    <script src="/static/angular/notes/notes.js"></script>-->
+<!--    <script src="/static/angular/notes/note/note.js"></script>-->
+<!--    <script src="static/angular/statistics/statistics.js"></script>-->
+<!--    <script src="/static/angular/projects/project/project.js"></script>-->
+<!--    <script src="/static/angular/service.js"></script>-->
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+{% block full_content %}
+<div class="container text-center p-5 mt-5" style="min-height: 90vh;" id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+    <span class="text-muted">This is footer</span>
+    </div>
+    {% block footer %}
+    {% endblock %}
+</footer>
+{% endblock %}
+</body>
+</html>

@@ -16,19 +16,19 @@ class OrdersDBServices(BaseDBServices):
 
     model = Orders
 
-    def create(self, user: User, product: Products, text: str) -> Orders:
+    def create(self, user: 'User', product: 'Products', text: str) -> Orders:
         """
         Create Order Instance
         @return: Order Instance
         """
-        order: Orders = super().new(user_id=user.id, product_id=product.id, text=text)
+        order: 'Orders' = super().new(user_id=user.id, product_id=product.id, text=text)
         order.set_uuid(uuid.uuid1().__str__())
 
         self.commit()
 
         return order
 
-    def add_product(self, order: Orders, product: Products) -> Orders:
+    def add_product(self, order: 'Orders', product: 'Products') -> 'Orders':
         """
         Add product to Order
         :param order: Order Instance
@@ -41,7 +41,7 @@ class OrdersDBServices(BaseDBServices):
 
         return order
 
-    def delete_product(self, order: Orders, product: Products) -> Orders:
+    def delete_product(self, order: 'Orders', product: 'Products') -> 'Orders':
         """
         Delete product from Order
         :param order: Order Instance

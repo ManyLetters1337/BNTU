@@ -9,7 +9,7 @@ class Groups(db.Model):
     """
     Model of Groups
     """
-    __tablename__ = 'Groups'
+    __tablename__ = 'groups'
     id = db.Column(db.Integer(), primary_key=True)
     uuid = db.Column(db.String(50), default=uuid.uuid4().__str__(), unique=True)
     number = db.Column(db.String(50), unique=True)

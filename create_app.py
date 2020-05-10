@@ -4,6 +4,10 @@ Create App
 import os
 from flask import Flask
 from database.core import db
+from flask_login import LoginManager
+
+
+login_manager = LoginManager()
 
 
 def create_app(db_url, register_blueprint):
@@ -15,6 +19,8 @@ def create_app(db_url, register_blueprint):
 
     db.init_app(app)
 
+    login_manager.init_app(app)
+
     if register_blueprint:
         register_blueprints(app)
 
@@ -22,4 +28,8 @@ def create_app(db_url, register_blueprint):
 
 
 def register_blueprints(app):
-    pass
+    from views.categories.categories import categories
+    from views.users.auth import auth
+
+    app.register_blueprint(categories, url_prefix='/categories')
+    app.register_blueprint(auth, url_prefix='/auth')
