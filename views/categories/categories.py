@@ -16,9 +16,7 @@ def categories_page():
     Page with categories
     :return: Page with categories
     """
-    categories_ = services.categories.get_all()
-
     return render_template(
         "/categories.html",
-        categories=categories_
+        categories=services.categories.get_all()
     )

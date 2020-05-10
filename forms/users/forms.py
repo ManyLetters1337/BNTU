@@ -17,7 +17,7 @@ def validate_student_number(form, student_number_field):
     :param form: Form Data
     :param student_number_field: Field with Student number from form (str)
     """
-    if not services.user.get_by_student_number(student_number_field.data):
+    if not services.users.get_by_student_number(student_number_field.data):
         message = "A user with this student number does not exist"
         flash(message)
         raise ValidationError(message)
@@ -29,8 +29,8 @@ def validate_user_password(form, password_field):
     :param form: Form Data
     :param password_field: Field with User password from Form (str)
     """
-    if services.user.get_by_student_number(form.student_number.data):
-        if not check_password_hash(services.user.get_password_hash(services.user.get_uuid_by_student_number(
+    if services.users.get_by_student_number(form.student_number.data):
+        if not check_password_hash(services.users.get_password_hash(services.users.get_uuid_by_student_number(
                 form.student_number.data)), password_field.data):
             message = "Wrong Password"
             flash(message)
@@ -53,7 +53,7 @@ def check_user_in_db(form, student_number_field):
     :param form: Form Data
     :param student_number_field: Field with Student Number from Form
     """
-    if services.user.get_by_student_number(student_number_field.data):
+    if services.users.get_by_student_number(student_number_field.data):
         message = "User already exist"
         flash(message)
         raise ValidationError(message)
@@ -106,7 +106,7 @@ def check_email_in_db(form, field):
     :param field:
     :return:
     """
-    if services.user.get_by_email(field.data):
+    if services.users.get_by_email(field.data):
         message = "User with this email already exist"
         flash(message)
         raise ValidationError(message)
@@ -133,7 +133,7 @@ def validate_user_existing(form, email_field):
     :param email_field: Email Field from Form
     :return:
     """
-    if not services.user.get_by_email(email_field.data):
+    if not services.users.get_by_email(email_field.data):
         message = "User with this email dose not exist"
         flash(message)
         raise ValidationError(message)

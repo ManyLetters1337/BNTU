@@ -7,6 +7,7 @@ from flask import request, url_for, render_template, redirect, Blueprint, flash
 from create_app import login_manager
 from database.service_registry import services
 from forms.users.forms import LoginForm, RegistrationForm, ResetPasswordForm, ResetPasswordRequestForm
+
 # from celery_tasks import send_mail, send_reset_password_email
 
 
@@ -25,7 +26,7 @@ def load_user(user_id: int) -> 'User':
     :param user_id: int (User.id)
     :return: User instance
     """
-    return services.user.get_by_id(user_id)
+    return services.users.get_by_id(user_id)
 
 
 @auth.route('/login', methods=['GET'])
@@ -48,7 +49,7 @@ def login_post():
     form: LoginForm = LoginForm()
 
     if form.validate():
-        login_user(services.user.get_by_id(services.user.get_by_student_number(form.student_number.data).id),
+        login_user(services.users.get_by_id(services.users.get_by_student_number(form.student_number.data).id),
                    remember=form.remember.data)
         return redirect(request.args.get('next') or url_for('product.main_page'))
     return render_template('login.html', form=form)
@@ -75,11 +76,14 @@ def registration_post():
     :return:
     """
     form: RegistrationForm = RegistrationForm()
+
+    groups = services.groups.get_all()
+    form.group.choices = [(group.id, group.number) for group in groups]
+
     if form.validate():
-        user: User = services.user.create(first_name=form.first_name.data, last_name=form.last_name.data,
-                                          email=form.email.data, student_number=form.student_number.data,
-                                          group_number=form.group_number.data, birthday_date=form.birthday_date.data,
-                                          password=form.password.data)
+        user: User = services.users.create(services.groups.get_by_id(form.group.data), first_name=form.first_name.data,
+                                           last_name=form.last_name.data, email=form.email.data,
+                                           student_number=form.student_number.data, password=form.password.data)
         # send_mail.apply_async(args=[form.email.data])
         return redirect(request.args.get('next') or url_for('product.main_page'))
     return render_template('registration.html', form=form)
@@ -104,7 +108,7 @@ def send_reset_password_token_post():
     """
     form: ResetPasswordRequestForm = ResetPasswordRequestForm()
     if form.validate():
-        user: 'User' = services.user.get_by_email(form.email.data)
+        user: 'User' = services.users.get_by_email(form.email.data)
         token = user.get_reset_password_token()
         url = url_for('auth.reset_password', token=token, _external=True)
         # send_reset_password_email.apply_async(args=[user.email, user.first_name, url])
@@ -136,8 +140,8 @@ def reset_password_post(token):
     """
     form: ResetPasswordForm = ResetPasswordForm()
     if form.validate():
-        user: User = services.user.verify_reset_password_token(token)
-        user = services.user.reset_password(user, form.password.data)
+        user: User = services.users.verify_reset_password_token(token)
+        user = services.users.reset_password(user, form.password.data)
         return redirect(url_for('auth.login'))
 
     return render_template('reset_password.html', form=form)

@@ -29,6 +29,7 @@ CREATE TABLE users(
     uuid varchar(36) NOT NULL UNIQUE,
     first_name varchar(100) NOT NULL,
     last_name varchar(100) NOT NULL,
+    email varchar (100) NOT NULL UNIQUE,
     group_id INT UNSIGNED NOT NULL,
     student_number varchar(50) NOT NULL,
     password_hash varchar(100) NOT NULL,

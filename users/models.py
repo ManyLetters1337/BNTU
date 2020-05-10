@@ -27,7 +27,7 @@ class Users(db.Model, UserMixin):
     group_id = db.Column(db.Integer, db.ForeignKey('groups.id'))
     student_number = db.Column(db.String(50), nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
-    birthday_date = db.Column(db.Date(), nullable=False)
+    birthday_date = db.Column(db.Date(), nullable=True)
     about = db.Column(db.Text(), nullable=True)
     role = db.Column(db.String(50), default='user')
     orders = db.relationship('Orders', backref='user', lazy=True)

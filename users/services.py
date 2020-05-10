@@ -1,6 +1,9 @@
 """
 Database interaction methods for a User class
 """
+from sqlalchemy.orm.exc import NoResultFound
+from werkzeug.exceptions import NotFound
+
 from database.base_services import BaseDBServices
 from .models import Users
 from typing import TYPE_CHECKING
@@ -21,11 +24,55 @@ class UsersDBService(BaseDBServices):
         :return:
         """
         user: 'Users' = super().new(group_id=group.id, email=kwargs['email'], first_name=kwargs['first_name'],
-                                    last_name=kwargs['last_name'], student_number=kwargs['student_number'],
-                                    birthday_date=kwargs['birthday_date'])
+                                    last_name=kwargs['last_name'], student_number=kwargs['student_number']
+                                    )
         user.set_password(kwargs['password'])
         user.set_uuid(uuid.uuid1().__str__())
 
         self.commit()
 
         return user
+
+    def get_by_email(self, email: str) -> 'Users':
+        """
+        Get User by Email
+        :param email: User Email
+        :return: User Instance
+        """
+        try:
+            return self.filter(email=email).first()
+        except NoResultFound as e:
+            raise NotFound()
+
+    def get_by_student_number(self, student_number: str) -> 'Users':
+        """
+        Get User by student number
+        :param student_number: Student number (str)
+        :return: User Instance
+        """
+        try:
+            return self.filter(student_number=student_number).first()
+        except NoResultFound as e:
+            raise NotFound()
+
+    def get_password_hash(self, uuid_: str) -> 'password_hash':
+        """
+        Get password_hash for user
+        :param uuid: User uuid
+        :return: Password_hash
+        """
+        try:
+            return self.filter(uuid=uuid_).first().password_hash
+        except NoResultFound as e:
+            raise NotFound()
+
+    def get_uuid_by_student_number(self, student_number: str) -> Users.uuid:
+        """
+        Get User uuid by student number
+        :param student_number:
+        :return:
+        """
+        try:
+            return self.filter(student_number=student_number).first().uuid
+        except NoResultFound as e:
+            raise NotFound()
