@@ -10,7 +10,7 @@ categories = Blueprint('categories', __name__, template_folder='templates')
 
 
 @categories.route('/', methods=['GET'])
-# @login_required
+@login_required
 def categories_page():
     """
     Page with categories

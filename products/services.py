@@ -24,6 +24,8 @@ class ProductsDBService(BaseDBServices):
                                         price=kwargs['price'], description=kwargs['description'])
         product.set_uuid(uuid.uuid1().__str__())
 
+        product.set_update_time()
+
         self.commit()
 
         return product

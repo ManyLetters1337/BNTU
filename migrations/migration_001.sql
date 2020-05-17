@@ -10,6 +10,7 @@ CREATE TABLE products(
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     uuid varchar(36) NOT NULL UNIQUE,
     name varchar(100) NOT NULL,
+    image varchar(300) NOT NULL default 'https://res.cloudinary.com/manyletters/image/upload/v1589568700/015e96e6a653950ded808f5704c0727f.jpg',
     category_id INT UNSIGNED NOT NULL,
     price DECIMAL UNSIGNED NOT NULL,
     description varchar(100) NOT NULL,
@@ -73,7 +74,8 @@ CREATE TABLE comments(
 CREATE TABLE rates(
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     product_id INT UNSIGNED NOT NULL,
-    rate INT UNSIGNED NOT NULL DEFAULT 0
+    rate INT UNSIGNED NOT NULL DEFAULT 0,
+    CONSTRAINT `fk_rate_product_id` FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE
 ) CHARACTER SET utf8;
 
 CREATE TABLE orders_products(
@@ -99,11 +101,11 @@ CREATE TABLE products_users(
     CONSTRAINT `fk_user_products` FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 )
 CHARACTER SET utf8;
-
-CREATE TABLE rates_users(
-    rate_id INT UNSIGNED,
-    user_id INT UNSIGNED,
-    CONSTRAINT `fk_rate_users_id` FOREIGN KEY (rate_id) REFERENCES rates (id) ON DELETE CASCADE,
-    CONSTRAINT `fk_user_rates` FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
-)
-CHARACTER SET utf8;
+--
+-- CREATE TABLE rates_users(
+--     rate_id INT UNSIGNED,
+--     user_id INT UNSIGNED,
+--     CONSTRAINT `fk_rate_users_id` FOREIGN KEY (rate_id) REFERENCES rates (id) ON DELETE CASCADE,
+--     CONSTRAINT `fk_user_rates` FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+-- )
+-- CHARACTER SET utf8;

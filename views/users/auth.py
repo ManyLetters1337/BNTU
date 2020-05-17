@@ -12,7 +12,7 @@ from forms.users.forms import LoginForm, RegistrationForm, ResetPasswordForm, Re
 
 
 if TYPE_CHECKING:
-    from users.models import User
+    from users.models import Users
 
 login_manager.login_view = 'auth.login'
 
@@ -20,7 +20,7 @@ auth = Blueprint('auth', __name__, template_folder='templates/auth')
 
 
 @login_manager.user_loader
-def load_user(user_id: int) -> 'User':
+def load_user(user_id: int) -> 'Users':
     """
     Load current logged-in user
     :param user_id: int (User.id)
@@ -81,9 +81,10 @@ def registration_post():
     form.group.choices = [(group.id, group.number) for group in groups]
 
     if form.validate():
-        user: User = services.users.create(services.groups.get_by_id(form.group.data), first_name=form.first_name.data,
-                                           last_name=form.last_name.data, email=form.email.data,
-                                           student_number=form.student_number.data, password=form.password.data)
+        user: 'Users' = services.users.create(services.groups.get_by_id(form.group.data),
+                                              first_name=form.first_name.data,
+                                              last_name=form.last_name.data, email=form.email.data,
+                                              student_number=form.student_number.data, password=form.password.data)
         # send_mail.apply_async(args=[form.email.data])
         return redirect(request.args.get('next') or url_for('product.main_page'))
     return render_template('registration.html', form=form)
@@ -108,7 +109,7 @@ def send_reset_password_token_post():
     """
     form: ResetPasswordRequestForm = ResetPasswordRequestForm()
     if form.validate():
-        user: 'User' = services.users.get_by_email(form.email.data)
+        user: 'Users' = services.users.get_by_email(form.email.data)
         token = user.get_reset_password_token()
         url = url_for('auth.reset_password', token=token, _external=True)
         # send_reset_password_email.apply_async(args=[user.email, user.first_name, url])
@@ -140,7 +141,7 @@ def reset_password_post(token):
     """
     form: ResetPasswordForm = ResetPasswordForm()
     if form.validate():
-        user: User = services.users.verify_reset_password_token(token)
+        user: 'Users' = services.users.verify_reset_password_token(token)
         user = services.users.reset_password(user, form.password.data)
         return redirect(url_for('auth.login'))
 

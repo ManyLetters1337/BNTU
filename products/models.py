@@ -43,6 +43,13 @@ class Products(db.Model):
         """
         self.uuid = uuid_
 
+    def set_update_time(self):
+        """
+        Set update time
+        :return:
+        """
+        self.update_date = datetime.now()
+
     def set_category(self, category):
         """
         Set category in products

@@ -30,6 +30,8 @@ def create_app(db_url, register_blueprint):
 def register_blueprints(app):
     from views.categories.categories import categories
     from views.users.auth import auth
+    from views.products.products import products
 
     app.register_blueprint(categories, url_prefix='/categories')
     app.register_blueprint(auth, url_prefix='/auth')
+    app.register_blueprint(products, url_prefix='/products')
