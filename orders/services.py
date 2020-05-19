@@ -4,6 +4,7 @@ Database interaction methods for a Orders class
 import uuid
 
 from database.base_services import BaseDBServices
+from database.core import db
 from .models import Orders
 from typing import TYPE_CHECKING
 
@@ -53,3 +54,11 @@ class OrdersDBServices(BaseDBServices):
         self.commit()
 
         return order
+
+    def get_orders_for_product(self, product: 'Products') -> 'List':
+        """
+        Get Order List for Product
+        :param product: Product Instance
+        :return:
+        """
+        return db.session.query(self.model).filter(self.model.products.any(id=product.id))

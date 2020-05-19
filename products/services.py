@@ -2,6 +2,7 @@
 Database interaction methods for a Products class
 """
 from database.base_services import BaseDBServices
+from database.core import db
 from .models import Products
 from typing import TYPE_CHECKING, List
 import uuid
@@ -102,3 +103,12 @@ class ProductsDBService(BaseDBServices):
         self.commit()
 
         return product
+
+    def get_product_with_category(self, category: 'Categories') -> 'List':
+        """
+        Get product list for specific Category
+        :param category: Category Entity
+        :return: List of Products
+        """
+        return db.session.query(self.model).filter_by(category_id=category.id).all()
+

@@ -5,6 +5,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from werkzeug.exceptions import NotFound
 
 from database.base_services import BaseDBServices
+from database.core import db
 from .models import Users
 from typing import TYPE_CHECKING
 import uuid
@@ -12,6 +13,7 @@ import uuid
 if TYPE_CHECKING:
     from products.models import Products
     from groups.models import Groups
+    from typing import List
 
 
 class UsersDBService(BaseDBServices):
@@ -76,3 +78,11 @@ class UsersDBService(BaseDBServices):
             return self.filter(student_number=student_number).first().uuid
         except NoResultFound as e:
             raise NotFound()
+
+    def get_users_for_product(self, product: 'Products') -> 'List':
+        """
+        Get Users List for Specific Product
+        :param product:
+        :return:
+        """
+        return db.session.query(self.model).filter(self.model.products.any(id=product.id)).all()

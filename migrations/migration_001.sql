@@ -101,11 +101,11 @@ CREATE TABLE products_users(
     CONSTRAINT `fk_user_products` FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 )
 CHARACTER SET utf8;
---
--- CREATE TABLE rates_users(
---     rate_id INT UNSIGNED,
---     user_id INT UNSIGNED,
---     CONSTRAINT `fk_rate_users_id` FOREIGN KEY (rate_id) REFERENCES rates (id) ON DELETE CASCADE,
---     CONSTRAINT `fk_user_rates` FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
--- )
--- CHARACTER SET utf8;
+
+CREATE TABLE rates_users(
+    rate_id INT UNSIGNED,
+    user_id INT UNSIGNED,
+    CONSTRAINT `fk_rate_users_id` FOREIGN KEY (rate_id) REFERENCES rates (id) ON DELETE CASCADE,
+    CONSTRAINT `fk_user_rates` FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+)
+CHARACTER SET utf8;

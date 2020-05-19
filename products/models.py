@@ -27,6 +27,7 @@ class Products(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     uuid = db.Column(db.String(50), default=uuid.uuid4().__str__(), unique=True)
     name = db.Column(db.String(100), nullable=False)
+    image = db.Column(db.String(300))
     category_id = db.Column(db.Integer(), db.ForeignKey('categories.id'))
     price = db.Column(db.DECIMAL(10, 2), nullable=False)
     description = db.Column(db.String(100), nullable=False)
@@ -65,12 +66,12 @@ class Products(db.Model):
         return {
             'id': self.id,
             'uuid': self.uuid,
+            'name': self.name,
             'category_id': self.category_id,
-            'price': self.price,
+            'price': self.price.__str__(),
             'description': self.description,
             'create_date': self.create_date,
-            'update_date': self.update_date,
-            'category': self.category.serialize()
+            'update_date': self.update_date
         }
 
 
