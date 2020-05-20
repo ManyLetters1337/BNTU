@@ -9,15 +9,16 @@ from .models import Orders
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from users.models import User
+    from users.models import Users
     from products.models import Products
+    from typing import List
 
 
 class OrdersDBServices(BaseDBServices):
 
     model = Orders
 
-    def create(self, user: 'User', product: 'Products', text: str) -> Orders:
+    def create(self, user: 'Users', product: 'Products', text: str) -> Orders:
         """
         Create Order Instance
         @return: Order Instance
@@ -61,4 +62,12 @@ class OrdersDBServices(BaseDBServices):
         :param product: Product Instance
         :return:
         """
-        return db.session.query(self.model).filter(self.model.products.any(id=product.id))
+        return db.session.query(self.model).filter(self.model.products.any(id=product.id)).all()
+
+    def get_orders_for_user(self, user: 'Users') -> 'List':
+        """
+        Get Order List for User
+        :param user: User Instance
+        :return:
+        """
+        return db.session.query(self.model).filter(self.model.user.any(id=user.id)).all()

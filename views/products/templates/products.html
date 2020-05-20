@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Products{% endblock %}
 {% block content %}
+    {% for product in products %}
     <div class="w-25 p-3 mx-auto bg-light border border-primary rounded col-md-4">
-        {% for product in products %}
             <p>
             ID: {{ product.id }}
             <p>
@@ -13,7 +13,8 @@
             Image: <img class="product_image" src="{{ product.image }}" width="100" height="100">
             <p>
             Descr: {{ product.description }}
-        {% endfor %}
     </div>
+    <p></p>
+    {% endfor %}
 {% endblock %}
 

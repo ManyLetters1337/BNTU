@@ -8,7 +8,6 @@ from werkzeug.security import generate_password_hash
 from database.core import db
 from time import time
 from config import secret_key
-from datetime import date
 from products.models import products_users, rates_users
 import jwt
 import uuid

@@ -34,6 +34,7 @@ def register_blueprints(app):
     from views.api.categories.categories import api_categories
     from views.api.orders.orders import api_orders
     from views.api.products.products import api_products
+    from views.api.users.users import api_users
 
     app.register_blueprint(categories, url_prefix='/categories')
     app.register_blueprint(auth, url_prefix='/auth')
@@ -41,3 +42,4 @@ def register_blueprints(app):
     app.register_blueprint(api_categories, url_prefix='/api/categories')
     app.register_blueprint(api_orders, url_prefix='/api/orders')
     app.register_blueprint(api_products, url_prefix='/api/products')
+    app.register_blueprint(api_users, url_prefix='/api/users')

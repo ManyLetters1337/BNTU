@@ -2,8 +2,9 @@
 Database interaction methods for a Tags class
 """
 from database.base_services import BaseDBServices
-from .models import Tags
+from database.core import db
 from typing import TYPE_CHECKING
+from .models import Tags
 import uuid
 
 if TYPE_CHECKING:
@@ -38,3 +39,11 @@ class TagsDBService(BaseDBServices):
         self.commit()
 
         return tag
+
+    def get_tags_for_product(self, product: 'Products') -> 'List':
+        """
+        Get Tag List for Specific Product
+        :param product: Specific Product
+        :return:
+        """
+        return db.session.query(self.model).filter(self.model.products.any(id=product.id)).all()

@@ -14,8 +14,8 @@ if TYPE_CHECKING:
 products = Blueprint('products', __name__, template_folder='templates')
 
 
-@login_required
 @products.route('/product=<uuid>', methods=['GET'])
+@login_required
 def product(uuid: str):
     """
     Product Page
@@ -26,8 +26,8 @@ def product(uuid: str):
     return render_template('product.html', product=product_)
 
 
-@login_required
 @products.route('/', methods=['GET'])
+@login_required
 def products_list():
     """
     Page with All Products
@@ -38,8 +38,8 @@ def products_list():
     return render_template('products.html', products=products_)
 
 
-@login_required
 @products.route('/add_product', methods=['GET'])
+@login_required
 def add_product():
     """
     Add Product Page
@@ -53,8 +53,8 @@ def add_product():
     return render_template('add_product.html', form=form)
 
 
-@login_required
 @products.route('/add_product', methods=['POST'])
+@login_required
 def add_product_post():
     """
     Post Method for Add Product Page

@@ -53,7 +53,7 @@ def product_users_info(uuid: str):
 
 
 @api_products.route('/<uuid>/orders', methods=['GET'])
-def product_users_orders(uuid: str):
+def product_orders_info(uuid: str):
     """
     Get Information about orders for specific Product
     :param uuid: UUID for specific product
@@ -64,3 +64,17 @@ def product_users_orders(uuid: str):
     orders: 'List' = services.orders.get_orders_for_product(product)
 
     return jsonify([order.serialize() for order in orders])
+
+
+@api_products.route('/<uuid>/tags', methods=['GET'])
+def product_tags_info(uuid: str):
+    """
+    Get Information about tags for specific Products
+    :param uuid: UUID for specific products
+    :return:
+    """
+    product: 'Products' = services.products.get_by_uuid(uuid)
+
+    tags: 'List' = services.tags.get_tags_for_product(product)
+
+    return jsonify([tag.serialize() for tag in tags])

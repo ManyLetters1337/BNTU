@@ -3,11 +3,10 @@ Database interaction methods for a User class
 """
 from sqlalchemy.orm.exc import NoResultFound
 from werkzeug.exceptions import NotFound
-
 from database.base_services import BaseDBServices
 from database.core import db
-from .models import Users
 from typing import TYPE_CHECKING
+from .models import Users
 import uuid
 
 if TYPE_CHECKING:

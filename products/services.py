@@ -3,11 +3,13 @@ Database interaction methods for a Products class
 """
 from database.base_services import BaseDBServices
 from database.core import db
+from typing import TYPE_CHECKING
 from .models import Products
-from typing import TYPE_CHECKING, List
 import uuid
 
 if TYPE_CHECKING:
+    from typing import List
+    from users.models import Users
     from categories.models import Categories
     from tags.models import Tags
     from orders.models import Orders
@@ -51,7 +53,7 @@ class ProductsDBService(BaseDBServices):
 
         return product
 
-    def add_tags(self, product: 'Products', tags: List) -> Products:
+    def add_tags(self, product: 'Products', tags: 'List') -> Products:
         """
         Add Tags to Product
         :param product: Product Instance
@@ -112,3 +114,10 @@ class ProductsDBService(BaseDBServices):
         """
         return db.session.query(self.model).filter_by(category_id=category.id).all()
 
+    def get_product_for_user(self, user: 'Users') -> 'List':
+        """
+        Get Products List for specific User
+        :param user: User Instance
+        :return:
+        """
+        return db.session.query(self.model).filter(self.model.users.any(id=user.id)).all()
