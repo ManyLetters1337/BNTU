@@ -14,8 +14,8 @@ CREATE TABLE products(
     category_id INT UNSIGNED NOT NULL,
     price DECIMAL UNSIGNED NOT NULL,
     description varchar(100) NOT NULL,
-    create_date date NOT NULL,
-    update_date date NOT NULL,
+    create_date datetime NOT NULL,
+    update_date datetime NOT NULL,
     CONSTRAINT `fk_product_category` FOREIGN KEY (category_id) REFERENCES categories (id)
 ) CHARACTER SET utf8;
 

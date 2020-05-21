@@ -5,7 +5,8 @@ import os
 from flask import Flask
 from database.core import db
 from flask_login import LoginManager
-
+from flask_uploads import patch_request_class, configure_uploads
+from config import photos
 
 login_manager = LoginManager()
 
@@ -16,6 +17,10 @@ def create_app(db_url, register_blueprint):
 
     app.secret_key = os.urandom(24)
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url
+    app.config['UPLOADED_PHOTOS_DEST'] = os.getcwd() + '/photos'
+
+    configure_uploads(app, photos)
+    patch_request_class(app)
 
     db.init_app(app)
 

@@ -4,11 +4,12 @@ Forms for Products
 import datetime
 from flask import flash
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, BooleanField, SelectField, DecimalField
-from werkzeug.security import check_password_hash
+from flask_wtf.file import FileAllowed, FileRequired
+from wtforms import StringField, SubmitField, BooleanField, SelectField, DecimalField, FileField
 from wtforms.validators import DataRequired, Email, ValidationError, length, EqualTo
 from database.service_registry import services
 from ..validators import only_letters, only_numbers
+from config import photos
 
 
 class AddProductForm(FlaskForm):
@@ -16,10 +17,10 @@ class AddProductForm(FlaskForm):
     Login Form for User
     """
     name = StringField("Name", validators=[DataRequired(), length(4, 100)])
-    image = StringField("Image", validators=[])
     categories = SelectField("Category", validators=[DataRequired()], coerce=int)
     price = DecimalField("Price", validators=[DataRequired()])
     description = StringField("Description", validators=[DataRequired(), length(4, 100)])
+    image = FileField("Image", validators=[FileAllowed(photos, 'Image only!')])
     submit = SubmitField()
 
 

@@ -51,7 +51,7 @@ def login_post():
     if form.validate():
         login_user(services.users.get_by_id(services.users.get_by_student_number(form.student_number.data).id),
                    remember=form.remember.data)
-        return redirect(request.args.get('next') or url_for('product.main_page'))
+        return redirect(request.args.get('next') or url_for('products.products_list'))
     return render_template('login.html', form=form)
 
 
@@ -86,7 +86,7 @@ def registration_post():
                                               last_name=form.last_name.data, email=form.email.data,
                                               student_number=form.student_number.data, password=form.password.data)
         # send_mail.apply_async(args=[form.email.data])
-        return redirect(request.args.get('next') or url_for('product.main_page'))
+        return redirect(request.args.get('next') or url_for('products.products_list'))
     return render_template('registration.html', form=form)
 
 

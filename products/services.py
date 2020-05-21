@@ -24,7 +24,7 @@ class ProductsDBService(BaseDBServices):
         @return: Product Instance
         """
         product: Products = super().new(category_id=category.id, name=kwargs['name'],
-                                        price=kwargs['price'], description=kwargs['description'])
+                                        price=kwargs['price'], description=kwargs['description'], image=kwargs['image'])
         product.set_uuid(uuid.uuid1().__str__())
 
         product.set_update_time()

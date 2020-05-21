@@ -2,24 +2,13 @@
 {% block title %}Add Product{% endblock %}
 {% block content %}
     <div class="w-25 p-3 mx-auto bg-light border border-primary rounded col-md-4">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
         {{ form.csrf_token }}
         <p>
           {{ form.name.label() }}
           {{ form.name(class="form-control",  maxlength="50") }}
             {% if form.name.errors %}
             {% for error in form.name.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-          {{ form.image.label() }}
-          {{ form.image(class="form-control",  maxlength="20") }}
-            {% if form.image.errors %}
-            {% for error in form.image.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
                 <spam class="{{ category }}">{{ error }}</spam>
             </div>
@@ -39,7 +28,7 @@
         </p>
         <p>
           {{ form.price.label() }}
-          {{ form.price(class="form-control",  maxlength="20") }}
+          {{ form.price(class="form-control",  maxlength="20", type="number") }}
             {% if form.price.errors %}
             {% for error in form.price.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
@@ -53,6 +42,17 @@
           {{ form.description(class="form-control",  maxlength="20") }}
             {% if form.description.errors %}
             {% for error in form.description.errors %}
+            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                <spam class="{{ category }}">{{ error }}</spam>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </p>
+        <p>
+          {{ form.image.label() }}
+          {{ form.image() }}
+            {% if form.image.errors %}
+            {% for error in form.image.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
                 <spam class="{{ category }}">{{ error }}</spam>
             </div>

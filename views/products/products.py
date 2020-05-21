@@ -3,7 +3,8 @@ Products views
 """
 from typing import TYPE_CHECKING
 from flask_login import login_required
-from flask import request, url_for, render_template, redirect, Blueprint, flash
+from flask import url_for, render_template, redirect, Blueprint
+from config import photos, basic_image_url
 from database.service_registry import services
 from forms.products.forms import AddProductForm
 
@@ -39,7 +40,7 @@ def products_list():
 
 
 @products.route('/add_product', methods=['GET'])
-@login_required
+# @login_required
 def add_product():
     """
     Add Product Page
@@ -54,7 +55,7 @@ def add_product():
 
 
 @products.route('/add_product', methods=['POST'])
-@login_required
+# @login_required
 def add_product_post():
     """
     Post Method for Add Product Page
@@ -66,9 +67,17 @@ def add_product_post():
     form.categories.choices = [(category.id, category.name) for category in all_categories]
 
     if form.validate():
+
+        if form.image.data:
+            image_name = photos.save(form.image.data)
+            image_url = photos.url(image_name)
+        else:
+            image_url = basic_image_url
+
         category: 'Categories' = services.categories.get_by_id(form.categories.data)
-        product_: 'Products' = services.products.create(category, name=form.name.data,
-                                                        price=form.price.data, description=form.description.data)
+
+        product_: 'Products' = services.products.create(category, name=form.name.data, price=form.price.data,
+                                                        description=form.description.data, image=image_url)
 
         return redirect(url_for('products.product', uuid=product_.uuid))
 
