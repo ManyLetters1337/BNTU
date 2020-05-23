@@ -8,7 +8,7 @@ from wtforms import StringField, SubmitField, BooleanField, PasswordField, DateF
 from werkzeug.security import check_password_hash
 from wtforms.validators import DataRequired, Email, ValidationError, length, EqualTo
 from database.service_registry import services
-from ..validators import only_letters, only_numbers
+from forms.validators import only_letters, only_numbers
 
 
 def validate_student_number(form, student_number_field):

@@ -24,7 +24,7 @@ class Orders(db.Model):
     city = db.Column(db.String(100))
     address = db.Column(db.String(100))
     post_index = db.Column(db.String(50))
-    status = db.Column(db.String(50), default='Created')
+    status = db.Column(db.String(50), default='Active')
     created_date = db.Column(db.DateTime(), default=datetime.now)
     products = db.relationship('Products', secondary=orders_products, back_populates='orders')
 
@@ -41,6 +41,19 @@ class Orders(db.Model):
         :param user_: User instance
         """
         self.user = user_
+
+    def set_detail(self, **kwargs):
+        """
+        Set Order Detail
+        :param kwargs:
+        :return:
+        """
+        self.city = kwargs['city']
+        self.country = kwargs['country']
+        self.address = kwargs['address']           # need refactoring
+        self.post_index = kwargs['post_index']
+
+        self.status = 'Paiding'
 
     def serialize(self) -> Dict:
         """
@@ -59,3 +72,15 @@ class Orders(db.Model):
             'created_date': self.created_date,
             'products': self.products.serialize()
         }
+
+    @property
+    def price(self):
+        """
+        Get Full Order Price
+        :return:
+        """
+        total_price = 0
+        for product in self.products:
+            total_price += product.price
+
+        return total_price

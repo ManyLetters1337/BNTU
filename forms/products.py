@@ -8,13 +8,13 @@ from flask_wtf.file import FileAllowed, FileRequired
 from wtforms import StringField, SubmitField, BooleanField, SelectField, DecimalField, FileField
 from wtforms.validators import DataRequired, Email, ValidationError, length, EqualTo
 from database.service_registry import services
-from ..validators import only_letters, only_numbers
+from forms.validators import only_letters, only_numbers
 from config import photos
 
 
 class AddProductForm(FlaskForm):
     """
-    Login Form for User
+    Add Product Form
     """
     name = StringField("Name", validators=[DataRequired(), length(4, 100)])
     categories = SelectField("Category", validators=[DataRequired()], coerce=int)

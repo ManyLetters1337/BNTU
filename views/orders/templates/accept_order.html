@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Add Product{% endblock %}
+{% block content %}
+    <div class="w-25 p-3 mx-auto bg-light border border-primary rounded col-md-4">
+        <form action="" method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <p>
+          {{ form.country.label() }}
+          {{ form.country(class="form-control",  maxlength="100") }}
+            {% if form.country.errors %}
+            {% for error in form.country.errors %}
+            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                <spam class="{{ category }}">{{ error }}</spam>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </p>
+        <p>
+          {{ form.city.label() }}
+          {{ form.city(class="form-control",  maxlength="100") }}
+            {% if form.city.errors %}
+            {% for error in form.city.errors %}
+            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                <spam class="{{ category }}">{{ error }}</spam>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </p>
+        <p>
+          {{ form.address.label() }}
+          {{ form.address(class="form-control",  maxlength="100") }}
+            {% if form.address.errors %}
+            {% for error in form.address.errors %}
+            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                <spam class="{{ category }}">{{ error }}</spam>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </p>
+        <p>
+          {{ form.post_index.label() }}
+          {{ form.post_index(class="form-control",  maxlength="20") }}    <!-- type='number' style="...."-->
+            {% if form.post_index.errors %}
+            {% for error in form.post_index.errors %}
+            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                <spam class="{{ category }}">{{ error }}</spam>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </p>
+        <p>
+          {{ form.submit(class="btn btn-primary mt-3") }}
+        </p>
+        </form>
+    </div>
+{% endblock %}
+

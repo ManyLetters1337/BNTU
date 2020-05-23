@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Orders{% endblock %}
+{% block content %}
+    <div class="w-25 p-3 mx-auto bg-light border border-primary rounded col-md-4">
+        <p>
+        UUID: {{ order.uuid }}
+        <p>
+        User ID: {{ order.user_id }}
+        <p>
+        Order Status: {{ order.status }}
+        <p>
+    </div>
+    <div class="mt-2 p-3">
+        {% for product in products %}
+            <div class="w-25 p-3 mx-auto bg-light border border-primary rounded">
+                <p>
+                ID: {{ product.id }}
+                <p>
+                Name: {{ product.name }}
+                <p>
+                Price: {{ product.price }}
+                <p>
+                Image: <img class="product_image" src="{{ product.image }}" width="100" height="100">
+                <p>
+                Descr: {{ product.description }}
+                <p><a href="{{ url_for('orders.delete_product', uuid=order.uuid, product_uuid=product.uuid) }}"><button>Delete Item</button></a></p>
+            </div>
+        <p></p>
+    {% endfor %}
+        Price: {{ order.price }}
+        <p><a href="{{ url_for('orders.accept_order', uuid=order.uuid) }}"><button>Accept Order</button></a></p>
+    </div>
+{% endblock %}
+

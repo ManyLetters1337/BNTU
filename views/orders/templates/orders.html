@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Orders{% endblock %}
+{% block content %}
+    {% for order in orders %}
+    <a class="" style="text-decoration: none" href="{{ url_for('orders.specific_order', uuid=order.uuid)  }}">
+    <div class="w-25 p-3 mx-auto bg-light border border-primary rounded col-md-4">
+            <p>
+            UUID: {{ order.uuid }}
+            <p>
+            Status: {{ order.status }}
+            <p>
+            Country: {{ order.country }}
+            <p>
+            User ID: {{ order.user_id }}
+            <p>
+            {{ order.products }}
+    </div>
+    </a>
+    <p></p>
+    {% endfor %}
+{% endblock %}
+

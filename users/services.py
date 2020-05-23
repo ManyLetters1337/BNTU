@@ -1,11 +1,14 @@
 """
 Database interaction methods for a User class
 """
+from click import BOOL
 from sqlalchemy.orm.exc import NoResultFound
 from werkzeug.exceptions import NotFound
 from database.base_services import BaseDBServices
 from database.core import db
 from typing import TYPE_CHECKING
+
+from orders.models import Orders
 from .models import Users
 import uuid
 
@@ -85,3 +88,22 @@ class UsersDBService(BaseDBServices):
         :return:
         """
         return db.session.query(self.model).filter(self.model.products.any(id=product.id)).all()
+
+    def add_product_to_order(self, user: 'Users', product: 'Products', order: 'Orders') -> 'BOOL':
+        """
+        Add Product To Order
+        :param user: User Instance
+        :param product: Product Instance
+        :param order: Order Instance
+        :return:
+        """
+        if product in order.products:
+            order.products.remove(product)
+            is_added = False
+        else:
+            order.products.append(product)
+            is_added = True
+
+        self.commit()
+
+        return is_added

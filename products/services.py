@@ -121,3 +121,11 @@ class ProductsDBService(BaseDBServices):
         :return:
         """
         return db.session.query(self.model).filter(self.model.users.any(id=user.id)).all()
+
+    def get_products_from_order(self, order: 'Orders'):
+        """
+        Get product from specific order
+        :param order: Order Instance
+        :return:
+        """
+        return db.session.query(self.model).filter(self.model.orders.any(id=order.id)).all()

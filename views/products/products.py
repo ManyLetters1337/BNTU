@@ -3,10 +3,11 @@ Products views
 """
 from typing import TYPE_CHECKING
 from flask_login import login_required
-from flask import url_for, render_template, redirect, Blueprint
+from flask import url_for, render_template, redirect, Blueprint, session, request
 from config import photos, basic_image_url
 from database.service_registry import services
-from forms.products.forms import AddProductForm
+from forms.products import AddProductForm
+from orders.models import Orders
 
 if TYPE_CHECKING:
     from products.models import Products
@@ -22,9 +23,30 @@ def product(uuid: str):
     Product Page
     :return:
     """
+    user: 'Users' = services.users.get_by_id(session['user_id'])
     product_: 'Products' = services.products.get_by_uuid(uuid)
+    order: 'Orders' = services.orders.get_active_order(user)
 
-    return render_template('product.html', product=product_)
+    is_added = services.orders.product_is_added(order, product_)
+
+    return render_template('product.html', product=product_, is_added=is_added)
+
+
+@products.route('/product=<uuid>', methods=['POST'])
+@login_required
+def product_post(uuid: str):
+    """
+    Product Page POST
+    :return:
+    """
+    user: 'Users' = services.users.get_by_id(session['user_id'])
+    product_: 'Products' = services.products.get_by_uuid(uuid)
+    order_: 'Orders' = services.orders.get_active_order(user)
+
+    if request.form['button'] == 'Buy':
+        is_added = services.users.add_product_to_order(user, product_, order_)
+
+    return render_template('product.html', product=product_, is_added=is_added)
 
 
 @products.route('/', methods=['GET'])

@@ -11,5 +11,12 @@
         <p>
         Descr: {{ product.description }}
     </div>
+    <form method="POST">
+        {% if not is_added %}
+            <p><button class="btn btn-primary" value="Buy" name="button">Buy</button></p>
+        {% else %}
+            <p><button class="btn btn-primary" value="Buy" name="button">Delete From Basket</button></p>
+        {% endif %}
+    </form>
 {% endblock %}
 

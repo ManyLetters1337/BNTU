@@ -6,7 +6,7 @@ from flask_login import login_user, login_required, logout_user
 from flask import request, url_for, render_template, redirect, Blueprint, flash
 from create_app import login_manager
 from database.service_registry import services
-from forms.users.forms import LoginForm, RegistrationForm, ResetPasswordForm, ResetPasswordRequestForm
+from forms.users import LoginForm, RegistrationForm, ResetPasswordForm, ResetPasswordRequestForm
 
 # from celery_tasks import send_mail, send_reset_password_email
 
@@ -156,6 +156,5 @@ def logout():
     :return: Page with Log In form
     """
     logout_user()
-    flash("You have been logged out.")
 
     return redirect(url_for('auth.login'))
