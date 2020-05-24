@@ -35,4 +35,4 @@ class CommentsDBServices(BaseDBServices):
         :param product: Product Instance
         :return:
         """
-        return db.session.query(self.model).filter_by(product_id=product.id).order_by(self.model.create_date)
+        return db.session.query(self.model).filter_by(product_id=product.id).order_by(db.desc(self.model.create_date))

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{{ product.name }}{% endblock %}
 {% block content %}
-    <div class="w-25 p-3 mx-auto bg-light border border-primary rounded col-md-4">
+    <div class="w-25 p-3 mb-2 bg-light border rounded">
         <p>
         Name: {{ product.name }}
         <p>
@@ -17,6 +17,8 @@
         {% else %}
             <p><button class="btn btn-primary" value="Buy" name="button">Delete From Basket</button></p>
         {% endif %}
+    </form>
+    <form method="POST">
         {{ comment_form.csrf_token }}
         <p>
           {{ comment_form.text.label() }}
@@ -33,10 +35,7 @@
           {{ comment_form.submit(class="btn btn-primary mt-3", value='Write') }}
         </p>
     </form>
-    <div class="mx-auto" id="comments">
-
+    <div class="text-center" id="comments">
     </div>
-<script src="../../static/plugins/Utils.js" type="module"></script>
-<script src="../../static/plugins/View.js" type="module"></script>
 {% endblock %}
 

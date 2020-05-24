@@ -27,7 +27,9 @@
             </div>
         <p></p>
     {% endfor %}
-        Price: {{ order.price }}
+        {% if order.status != 'Paiding' %}
+            Price: {{ order.price }}
+        {% endif %}
         <p><a href="{{ url_for('orders.accept_order', uuid=order.uuid) }}"><button>Accept Order</button></a></p>
     </div>
 {% endblock %}

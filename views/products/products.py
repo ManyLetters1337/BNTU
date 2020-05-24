@@ -58,9 +58,12 @@ def product_post(uuid: str):
 
     if request.form.get('button') == 'Buy':
         is_added = services.users.add_product_to_order(user, product_, order_)
+
     elif comment_form.validate() and request.form.get('submit') == 'Write':
         comment: 'Comments' = services.comments.create(user, product_, comment_form.text.data)
         comment_form.text.data = ''
+
+        return redirect(url_for('products.product', uuid=product_.uuid))
 
     return render_template('product.html', product=product_, is_added=is_added, comment_form=comment_form)
 

@@ -12,8 +12,8 @@ class AcceptOrderForm(FlaskForm):
     """
     Accept Order Form
     """
-    country = StringField("Country", validators=[DataRequired(), length(2, 100), only_letters])
-    city = StringField("City", validators=[DataRequired(), length(2, 100), only_letters])
+    country = StringField("Country", validators=[DataRequired(), length(2, 100)])
+    city = StringField("City", validators=[DataRequired(), length(2, 100)])
     address = StringField("Address", validators=[DataRequired(), length(4, 100)])
     post_index = StringField("Post Index", validators=[DataRequired(), length(2, 20), only_numbers])
     submit = SubmitField()
