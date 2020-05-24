@@ -115,11 +115,10 @@
 
 <main class="content">
     <div class="">
-        {% block full_content %}
         <div class="container mt-2" style="" id="content">
-        {% block content %}
-        {% endblock %}
-    </div>
+            {% block content %}
+            {% endblock %}
+        </div>
     <footer class="footer py-3">
         <div class="container">
             <span class="text-muted">Text</span>
@@ -127,8 +126,7 @@
         {% block footer %}
         {% endblock %}
     </footer>
-    {% endblock %}
-  </div>
+    </div>
 </main>
 
 </body>

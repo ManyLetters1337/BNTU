@@ -5,12 +5,7 @@ from typing import TYPE_CHECKING
 from flask_login import login_required
 from flask import url_for, render_template, redirect, Blueprint, session, request
 
-from comments.models import Comments
-from config import photos, basic_image_url
 from database.service_registry import services
-from forms.comments import CommentForm
-from forms.products import AddProductForm
-from orders.models import Orders
 
 if TYPE_CHECKING:
     from products.models import Products
