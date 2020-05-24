@@ -9,7 +9,7 @@ from database.service_registry import services
 from forms.users import LoginForm, RegistrationForm, ResetPasswordForm, ResetPasswordRequestForm
 
 # from celery_tasks import send_mail, send_reset_password_email
-
+from orders.models import Orders
 
 if TYPE_CHECKING:
     from users.models import Users
@@ -85,6 +85,7 @@ def registration_post():
                                               first_name=form.first_name.data,
                                               last_name=form.last_name.data, email=form.email.data,
                                               student_number=form.student_number.data, password=form.password.data)
+        order_: 'Orders' = services.orders.create(user)
         # send_mail.apply_async(args=[form.email.data])
         return redirect(request.args.get('next') or url_for('products.products_list'))
     return render_template('registration.html', form=form)

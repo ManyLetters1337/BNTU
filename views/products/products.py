@@ -4,14 +4,18 @@ Products views
 from typing import TYPE_CHECKING
 from flask_login import login_required
 from flask import url_for, render_template, redirect, Blueprint, session, request
+
+from comments.models import Comments
 from config import photos, basic_image_url
 from database.service_registry import services
+from forms.comments import CommentForm
 from forms.products import AddProductForm
 from orders.models import Orders
 
 if TYPE_CHECKING:
     from products.models import Products
     from categories.models import Categories
+    from users.models import Users
 
 products = Blueprint('products', __name__, template_folder='templates')
 
@@ -27,9 +31,14 @@ def product(uuid: str):
     product_: 'Products' = services.products.get_by_uuid(uuid)
     order: 'Orders' = services.orders.get_active_order(user)
 
+    if not order:
+        order: 'Orders' = services.orders.create(user)
+
     is_added = services.orders.product_is_added(order, product_)
 
-    return render_template('product.html', product=product_, is_added=is_added)
+    comment_form: 'CommentForm' = CommentForm()
+
+    return render_template('product.html', product=product_, is_added=is_added, comment_form=comment_form)
 
 
 @products.route('/product=<uuid>', methods=['POST'])
@@ -43,10 +52,17 @@ def product_post(uuid: str):
     product_: 'Products' = services.products.get_by_uuid(uuid)
     order_: 'Orders' = services.orders.get_active_order(user)
 
-    if request.form['button'] == 'Buy':
-        is_added = services.users.add_product_to_order(user, product_, order_)
+    is_added = services.orders.product_is_added(order_, product_)
 
-    return render_template('product.html', product=product_, is_added=is_added)
+    comment_form: 'CommentForm' = CommentForm()
+
+    if request.form.get('button') == 'Buy':
+        is_added = services.users.add_product_to_order(user, product_, order_)
+    elif comment_form.validate() and request.form.get('submit') == 'Write':
+        comment: 'Comments' = services.comments.create(user, product_, comment_form.text.data)
+        comment_form.text.data = ''
+
+    return render_template('product.html', product=product_, is_added=is_added, comment_form=comment_form)
 
 
 @products.route('/', methods=['GET'])
@@ -62,7 +78,7 @@ def products_list():
 
 
 @products.route('/add_product', methods=['GET'])
-# @login_required
+@login_required
 def add_product():
     """
     Add Product Page
@@ -77,7 +93,7 @@ def add_product():
 
 
 @products.route('/add_product', methods=['POST'])
-# @login_required
+@login_required
 def add_product_post():
     """
     Post Method for Add Product Page

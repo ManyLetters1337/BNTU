@@ -66,7 +66,7 @@ CREATE TABLE comments(
     product_id INT UNSIGNED NOT NULL,
     text varchar(500) NOT NULL,
     rate INT NOT NULL DEFAULT 0,
-    create_date date NOT NULL,
+    create_date datetime NOT NULL,
     CONSTRAINT `fk_comment_user` FOREIGN KEY (user_id) REFERENCES users (id),
     CONSTRAINT `fk_comment_product` FOREIGN KEY (product_id) REFERENCES products (id)
 ) CHARACTER SET utf8;

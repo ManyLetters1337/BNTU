@@ -4,6 +4,7 @@ Database interaction methods for a Comments class
 import uuid
 
 from database.base_services import BaseDBServices
+from database.core import db
 from .models import Comments
 from typing import TYPE_CHECKING
 
@@ -27,3 +28,11 @@ class CommentsDBServices(BaseDBServices):
         self.commit()
 
         return comment
+
+    def get_for_product(self, product: 'Products'):
+        """
+        Get Comments for Product
+        :param product: Product Instance
+        :return:
+        """
+        return db.session.query(self.model).filter_by(product_id=product.id).order_by(self.model.create_date)

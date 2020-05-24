@@ -17,6 +17,26 @@
         {% else %}
             <p><button class="btn btn-primary" value="Buy" name="button">Delete From Basket</button></p>
         {% endif %}
+        {{ comment_form.csrf_token }}
+        <p>
+          {{ comment_form.text.label() }}
+          {{ comment_form.text(class="form-control",  maxlength="100") }}
+            {% if comment_form.text.errors %}
+            {% for error in comment_form.text.errors %}
+            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                <spam class="{{ category }}">{{ error }}</spam>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </p>
+        <p>
+          {{ comment_form.submit(class="btn btn-primary mt-3", value='Write') }}
+        </p>
     </form>
+    <div class="mx-auto" id="comments">
+
+    </div>
+<script src="../../static/plugins/Utils.js" type="module"></script>
+<script src="../../static/plugins/View.js" type="module"></script>
 {% endblock %}
 

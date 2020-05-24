@@ -78,7 +78,7 @@ def delete_product(uuid: str, product_uuid: str):
 
     order_ = services.orders.remove_product(order_, product)
 
-    return redirect(url_for('orders.order', uuid=order_.uuid))
+    return redirect(url_for('orders.orders_page', uuid=order_.uuid))
 
 
 @orders.route('/oder=<uuid>/accept', methods=['GET'])

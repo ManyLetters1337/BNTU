@@ -30,6 +30,7 @@ class Users(db.Model, UserMixin):
     about = db.Column(db.Text(), nullable=True)
     role = db.Column(db.String(50), default='user')
     orders = db.relationship('Orders', backref='user', lazy=True)
+    comments = db.relationship('Comments', backref='user', lazy=True)
     products = db.relationship('Products', secondary=products_users, back_populates='users')
     rates = db.relationship('Rates', secondary=rates_users, back_populates='users')
 

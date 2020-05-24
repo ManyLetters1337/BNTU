@@ -70,7 +70,7 @@ class Orders(db.Model):
             'post_index': self.post_index,
             'status': self.status,
             'created_date': self.created_date,
-            'products': self.products.serialize()
+            'products': [product.serialize() for product in self.products]
         }
 
     @property

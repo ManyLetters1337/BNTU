@@ -68,5 +68,6 @@ class Comments(db.Model):
             'product_id': self.product_id,
             'text': self.text,
             'rate': self.rate,
-            'create_date': self.create_date
+            'create_date': self.create_date,
+            'user': self.user.serialize()
         }

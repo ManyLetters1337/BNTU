@@ -24,7 +24,7 @@ def orders_list():
     return jsonify([order.serialize() for order in orders])
 
 
-@api_orders.route('/<uuid>', methods=['GET'])
+@api_orders.route('/order=<uuid>', methods=['GET'])
 def order_info(uuid: str):
     """
     Get Information About Specific Order
@@ -33,4 +33,4 @@ def order_info(uuid: str):
     """
     order: 'Orders' = services.orders.get_by_uuid(uuid)
 
-    return jsonify(order)
+    return jsonify(order.serialize())
