@@ -57,7 +57,7 @@ class BaseDBServices:
         Get all instance
         @return:
         """
-        return db.session.query(self.model).all()
+        return db.session.query(self.model)
 
     def get_uuid_by_id(self, id_: int) -> uuid:
         """

@@ -4,7 +4,7 @@ App Config
 import os
 from flask_uploads import UploadSet, IMAGES
 
-page_size = 5
+page_size = 10
 
 secret_key = os.urandom(24)
 

@@ -2,22 +2,36 @@
 {% block title %}Products{% endblock %}
 {% block content %}
     <div class="row d-inline-flex">
-        {% for product in products %}
+        {% for product in products.items %}
         <a class="" style="text-decoration: none" href="{{ url_for('products.product', uuid=product.uuid) }}">
-        <div class="product p-3 m-2 border border-primary rounded">
-                <p>
-                UUID: {{ product.uuid }}
-                <p>
-                Name: {{ product.name }}
-                <p>
-                Price: {{ product.price }}
-                <p>
-                Image: <img class="product_image" src="{{ product.image }}" width="100" height="100">
-                <p>
-                Descr: {{ product.description }}
+        <div class="product p-3 m-2 rounded">
+                <h6 class="text-center">{{ product.name }}</h6>
+                <hr>
+                <img class="product_image rounded m-0 mr-2 ml-2" src="{{ product.image }}">
+                <hr>
+                <div class="product_price text-center">{{ product.price }}<span>₽</span></div>
         </div>
         </a>
 {% endfor %}
     </div>
+<div class="container mx-auto col-md-4">
+	<nav class="">
+  <ul class="pagination">
+	  {% if products.has_prev %}
+    <li class="page-item"><a class="page-link" href="{{ url_for('products.products_list', page = products.prev_num) }}">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="{{ url_for('products.products_list', page = products.prev_num) }}">{{ products.prev_num }}</a></li>
+    <li class="page-item"><a class="page-link" href="{{ url_for('products.products_list', page = products.page ) }}">{{ products.page }}</a></li>
+	  {% elif products.has_next %}
+	  <li class="page-item" style=""><a class="page-link" href="{{ url_for('products.products_list', page = products.page) }}">Previous</a></li>
+	  <li class="page-item"><a class="page-link" href="{{ url_for('products.products_list', page = products.page ) }}">{{ products.page }}</a></li>
+	  {% else %}
+	  {% endif %}
+	  {% if products.has_next %}
+    <li class="page-item"><a class="page-link" href="{{ url_for('products.products_list', page = products.next_num) }}">{{ products.next_num }}</a></li>
+    <li class="page-item"><a class="page-link" href="{{ url_for('products.products_list', page = products.next_num) }}">Next</a></li>
+	  {% endif %}
+  </ul>
+</nav>
+</div>
 {% endblock %}
 

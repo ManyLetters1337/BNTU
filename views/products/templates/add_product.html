@@ -39,7 +39,7 @@
         </p>
         <p>
           {{ form.description.label() }}
-          {{ form.description(class="form-control",  maxlength="20") }}
+          {{ form.description(class="form-control",  maxlength="100") }}
             {% if form.description.errors %}
             {% for error in form.description.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">

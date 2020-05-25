@@ -3,16 +3,16 @@ Database interaction methods for a Products class
 """
 from database.base_services import BaseDBServices
 from database.core import db
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Dict
 from .models import Products
+from categories.models import Categories
+from orders.models import Orders
 import uuid
 
 if TYPE_CHECKING:
     from typing import List
     from users.models import Users
-    from categories.models import Categories
     from tags.models import Tags
-    from orders.models import Orders
 
 
 class ProductsDBService(BaseDBServices):
@@ -129,3 +129,43 @@ class ProductsDBService(BaseDBServices):
         :return:
         """
         return db.session.query(self.model).filter(self.model.orders.any(id=order.id)).all()
+
+    def get_products_buy_statistic(self):
+        """
+        Get Product Buyer Statistics
+        :return:
+        """
+        orders: 'List' = db.session.query(Orders).filter_by(status='Paiding').all()
+        products: 'List' = db.session.query(self.model).all()
+
+        result = {}
+
+        for product in products:
+            numbers = 0
+            for order in orders:
+                for check_product in order.products:
+                    if product == check_product:
+                        numbers += 1
+            result[product] = numbers
+
+        return result
+
+    def get_product_categories_statistic(self):
+        """
+        Get Product Categories Statistics
+        :return:
+        """
+        product_buy_statistic: 'Dict' = self.get_products_buy_statistic()
+        categories: 'List' = db.session.query(Categories).all()
+
+        result = {}
+
+        for category in categories:
+            numbers = 0
+            for product, value in product_buy_statistic.items():
+                if product.categories == category:
+                    numbers += value
+
+            result[category] = numbers
+
+        return result

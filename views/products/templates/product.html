@@ -1,22 +1,36 @@
 {% extends "base.html" %}
 {% block title %}{{ product.name }}{% endblock %}
 {% block content %}
-    <div class="w-25 p-3 mb-2 bg-light border rounded">
-        <p>
-        Name: {{ product.name }}
-        <p>
-        Price: {{ product.price }}
-        <p>
-        Image: <img class="product_image" src="{{ product.image }}" width="100" height="100">
-        <p>
-        Descr: {{ product.description }}
-    </div>
     <form method="POST">
-        {% if not is_added %}
-            <p><button class="btn btn-primary" value="Buy" name="button">Buy</button></p>
-        {% else %}
-            <p><button class="btn btn-primary" value="Buy" name="button">Delete From Basket</button></p>
-        {% endif %}
+        <div class="row">
+        <div class="col-sm-2">
+
+        </div>
+        <div class="col-sm specific_product_info row d-inline-flex">
+            <img class="specific_product_image m-2" src="{{ product.image }}" width="350" height="350">
+                <div class="specific_product_info ml-5">
+                    <h5 class="specific_product_part_title mt-3">Наименование товара:</h5>
+                    <h3 class="specific_product_name ">{{ product.name }}</h3>
+                <br>
+                    <h5 class="specific_product_part_title">Категория: </h5>
+                    <div class="specific_product_description"><h5>{{ product.categories.name }}</h5></div>
+                <br>
+                    <h5 class="specific_product_part_title">Описание: </h5>
+                    <div class="specific_product_description"><h5>{{ product.description }}</h5></div>
+                <br>
+                    <h5 class="specific_product_part_title">Стоимость:</h5>
+                    <h5 class="">{{ product.price }}<span>₽</span></h5>
+                <hr>
+                <div class="buy_button text-center">
+                    {% if not is_added %}
+                        <p><button class="btn btn-primary" value="Buy" name="button">Купить</button></p>
+                    {% else %}
+                        <p><button class="btn btn-primary" value="Buy" name="button">Удалить из корзины</button></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
     </form>
     <form method="POST">
         {{ comment_form.csrf_token }}

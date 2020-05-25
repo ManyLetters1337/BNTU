@@ -6,7 +6,7 @@ from flask_login import login_required
 from flask import url_for, render_template, redirect, Blueprint, session, request
 
 from comments.models import Comments
-from config import photos, basic_image_url
+from config import photos, basic_image_url, page_size
 from database.service_registry import services
 from forms.comments import CommentForm
 from forms.products import AddProductForm
@@ -35,6 +35,8 @@ def product(uuid: str):
         order: 'Orders' = services.orders.create(user)
 
     is_added = services.orders.product_is_added(order, product_)
+
+    some = services.products.get_product_categories_statistic()
 
     comment_form: 'CommentForm' = CommentForm()
 
@@ -75,9 +77,10 @@ def products_list():
     Page with All Products
     :return:
     """
+    page: int = int(request.args.get('page', default=1))
     products_ = services.products.get_all()
 
-    return render_template('products.html', products=products_)
+    return render_template('products.html', products=services.products.apply_pagination(products_, page, page_size))
 
 
 @products.route('/add_product', methods=['GET'])

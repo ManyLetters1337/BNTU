@@ -9,7 +9,7 @@ html body a {
 }
 
 html body a:hover{
-  transition: all 0.4s;
+  transition: all 0.2s;
   color: green;
 }
 
@@ -18,11 +18,44 @@ body {
     margin-bottom: 4rem;
 }
 
+div.product{
+  border: 1px solid darkgray;
+}
+
+div.product:hover{
+  transition: all 0.4s;
+  border: 2px solid green;
+}
+
+img.product_image{
+  width: 150px;
+  height: 150px;
+}
+
+img.specific_product_image{
+  border-radius: 10px;
+}
+
+.specific_product_part_title{
+  font-family: cursive;
+}
+
+.specific_product_name{
+  font-family: "Abyssinica SIL";
+}
+
+.specific_product_description{
+  font-family: "Abyssinica SIL";
+  max-width: 400px;
+}
+
+/*div.specific_product_info{*/
+/*  height: 200px;*/
+/*  width: 500px;*/
+/*}*/
+
 .product {
-  min-width: 200px;
-  min-height: 300px;
-  max-height: 350px;
-  max-width: 250px;
+  height: 300px;
 }
 
 .footer {
@@ -63,7 +96,7 @@ body {
   padding-left: 20px;
 }
 
-nav{
+nav.navbar {
     background: white;
     border-bottom: 1px solid black;
 }

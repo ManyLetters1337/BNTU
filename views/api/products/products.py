@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING
 from comments.models import Comments
 from database.service_registry import services
 from orders.models import Orders
+from config import page_size
 
 api_products = Blueprint('api_products', __name__)
 
@@ -23,9 +24,10 @@ def products_list() -> 'Dict':
     Get Products list
     :return:
     """
-    products: 'List' = services.products.get_all()
+    page: int = int(request.args.get('page', default=1))
+    products = services.products.apply_pagination(services.products.get_all(), page, page_size)
 
-    return jsonify([product.serialize() for product in products])
+    return jsonify([product.serialize() for product in products.items])
 
 
 @api_products.route('/product=<uuid>', methods=['GET'])
