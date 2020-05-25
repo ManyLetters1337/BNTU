@@ -36,8 +36,6 @@ def product(uuid: str):
 
     is_added = services.orders.product_is_added(order, product_)
 
-    some = services.products.get_product_categories_statistic()
-
     comment_form: 'CommentForm' = CommentForm()
 
     return render_template('product.html', product=product_, is_added=is_added, comment_form=comment_form)

@@ -2,8 +2,10 @@
 Authentication for User Model
 """
 from typing import TYPE_CHECKING
+
+from click import BOOL
 from flask_login import login_user, login_required, logout_user
-from flask import request, url_for, render_template, redirect, Blueprint, flash
+from flask import request, url_for, render_template, redirect, Blueprint, flash, session
 from create_app import login_manager
 from database.service_registry import services
 from forms.users import LoginForm, RegistrationForm, ResetPasswordForm, ResetPasswordRequestForm
@@ -49,10 +51,19 @@ def login_post():
     form: LoginForm = LoginForm()
 
     if form.validate():
-        login_user(services.users.get_by_id(services.users.get_by_student_number(form.student_number.data).id),
-                   remember=form.remember.data)
+        login_user_with_permissions(services.users.get_by_id(services.users.get_by_student_number(
+            form.student_number.data).id), form.remember.data)
         return redirect(request.args.get('next') or url_for('products.products_list'))
     return render_template('login.html', form=form)
+
+
+def login_user_with_permissions(user: 'Users', remember_: 'BOOL'):
+    """
+    Add User Permissions to Session
+    :return:
+    """
+    session['role'] = user.role
+    login_user(user, remember=remember_)
 
 
 @auth.route('/registration', methods=['GET'])

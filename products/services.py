@@ -143,9 +143,8 @@ class ProductsDBService(BaseDBServices):
         for product in products:
             numbers = 0
             for order in orders:
-                for check_product in order.products:
-                    if product == check_product:
-                        numbers += 1
+                if product in order.products:
+                    numbers += 1
             result[product] = numbers
 
         return result
