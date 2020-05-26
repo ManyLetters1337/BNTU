@@ -4,8 +4,8 @@
             <th scope="col">#</th>
             <th scope="col">Название</th>
             <th scope="col">Стоимость</th>
-            <th scope="col">Дата последнего изменения</th>
             <th scope="col">Количество покупок</th>
+            <th scope="col">Дата последнего изменения</th>
         </tr>
     </thead>
     <tbody ng-repeat="(key, value) in productsData">
@@ -13,8 +13,8 @@
             <th class="admin_table_element" scope="row">{{ $index + 1 }}</th>
             <td class="admin_table_element" ng-bind="value['name']"></td>
             <td class="admin_table_element" ng-bind="value['price']"></td>
-            <td class="admin_table_element" ng-bind="value['update_date']"></td>
             <td class="admin_table_element" ng-bind="value['purchases']"></td>
+            <td class="admin_table_element" ng-bind="value['update_date']"></td>
         </tr>
     </tbody>
 </table>

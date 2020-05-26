@@ -1,1 +1,53 @@
-<h1>Prodyct</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <h5>Название:</h5>
+            <h6 class="font-italic" ng-bind="product['name']"></h6>
+            <h5>Стоимость:</h5>
+            <h6 class="font-italic" ng-bind="product['price']"></h6>
+            <h5>Дата создания:</h5>
+            <h6 class="font-italic" ng-bind="product['create_date']"></h6>
+        </div>
+        <div class="col-sm-2">
+            <h5 ng-if="product['project']['description']">Description:</h5>
+            <h6 class="font-italic" ng-if="product['project']['description']" ng-bind="product['project']['description']"></h6>
+            <h5>Created By User:</h5>
+<!--            <a ui-sref="userInformation({ uuid: project['user']['uuid'] })"><h6 class="font-italic" ng-bind="project['user']['username']"></h6></a>-->
+            <h5>Created:</h5>
+            <h6 class="font-italic" ng-bind="product['project']['created_on']"></h6>
+        </div>
+    </div>
+    <div class="row">
+        <h4>Notes:</h4>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Created On</th>
+                    <th scope="col">UUID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(key, value) in orders">
+                    <th scope="row">{{ $index + 1 }}</th>
+                    <td ng-bind="value"></td>
+                    <td ng-bind="value['status']"></td>
+                    <td ng-bind="value['created_on'].slice(4, 16)"></td>
+                    <td ng-bind="value['uuid']"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        <div class="row">
+            <div class="card-body">
+                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

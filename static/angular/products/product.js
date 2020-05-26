@@ -3,14 +3,25 @@ angular.module('products.product', [
 ])
 
 .controller('ProductController', function ($http, $scope, $stateParams, CONSTANS_URLS, service) {
-    function getProject (url) {
+    function getProduct (url) {
         let promiseObj = service.getData(url);
         promiseObj.then(function (value){
-            $scope.project = value;
+            $scope.product = value;
         })
     }
 
-    getProject(CONSTANS_URLS.project + $stateParams['uuid']);
+    function getOrdersForProduct (url) {
+        let promiseObj = service.getData(url);
+        promiseObj.then(function (value){
+            $scope.orders = value;
+        })
+    }
+
+    console.log(CONSTANS_URLS.orders_for_product + $stateParams['uuid']);
+
+    getProduct(CONSTANS_URLS.product + $stateParams['uuid']);
+
+    getOrdersForProduct(CONSTANS_URLS.orders_for_product + $stateParams['uuid'])
 
     function getCanvas() {
         return document.getElementById('donutChart').getContext('2d');
@@ -80,6 +91,6 @@ angular.module('products.product', [
 
     };
 
-    createChart(getDataForStatistic());
+    // createChart(getDataForStatistic());
 
 });

@@ -3,8 +3,12 @@ Api For Orders
 """
 from flask import Blueprint, jsonify, session, request
 from typing import TYPE_CHECKING
+
+from flask_login import login_required
+
 from database.service_registry import services
 from orders.models import Orders
+from products.models import Products
 
 api_orders = Blueprint('api_orders', __name__)
 
@@ -34,3 +38,17 @@ def order_info(uuid: str):
     order: 'Orders' = services.orders.get_by_uuid(uuid)
 
     return jsonify(order.serialize())
+
+
+@api_orders.route('/product=<uuid>', methods=['GET'])
+def orders_for_product(uuid: str):
+    """
+    Get Orders For Product
+    :param uuid:
+    :return:
+    """
+    product: 'Products' = services.products.get_by_uuid(uuid)
+
+    orders: 'List' = services.orders.get_orders_for_product(product)
+
+    return jsonify([order.serialize() for order in orders])
