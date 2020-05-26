@@ -59,6 +59,13 @@ class BaseDBServices:
         """
         return db.session.query(self.model)
 
+    def get_all_in_list(self):
+        """
+        Get all instance
+        :return:
+        """
+        return db.session.query(self.model).all()
+
     def get_uuid_by_id(self, id_: int) -> uuid:
         """
         Get uuid by id

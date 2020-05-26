@@ -130,13 +130,38 @@ class ProductsDBService(BaseDBServices):
         """
         return db.session.query(self.model).filter(self.model.orders.any(id=order.id)).all()
 
+    def get_products_for_category(self, category: 'Categories'):
+        """
+        Get Products For Category
+        :param category:
+        :return:
+        """
+        return db.session.query(self.model).filter_by(categories=category)
+
+    def get_numbers_purchases_by_uuid(self, uuid_: str):
+        """
+        Get Purchases for Product
+        :param uuid_: Product UUID
+        :return:
+        """
+        orders: 'List' = db.session.query(Orders).filter_by(status='Paiding').all()
+        product: 'Products' = self.get_by_uuid(uuid_)
+
+        numbers = 0
+
+        for order in orders:
+            if product in order.products:
+                numbers += 1
+
+        return numbers
+
     def get_products_buy_statistic(self):
         """
         Get Product Buyer Statistics
         :return:
         """
         orders: 'List' = db.session.query(Orders).filter_by(status='Paiding').all()
-        products: 'List' = db.session.query(self.model).all()
+        products: 'List' = self.get_all_in_list()
 
         result = {}
 

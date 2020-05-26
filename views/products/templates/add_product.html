@@ -6,7 +6,7 @@
         {{ form.csrf_token }}
         <p>
           {{ form.name.label() }}
-          {{ form.name(class="form-control",  maxlength="50") }}
+          {{ form.name(class="form-control custom_input",  maxlength="50") }}
             {% if form.name.errors %}
             {% for error in form.name.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
@@ -17,7 +17,7 @@
         </p>
         <p>
           {{ form.categories.label() }}
-          {{ form.categories(class="form-control",  maxlength="20") }}
+          {{ form.categories(class="form-control custom_select",  maxlength="20") }}
             {% if form.categories.errors %}
             {% for error in form.categories.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
@@ -28,7 +28,7 @@
         </p>
         <p>
           {{ form.price.label() }}
-          {{ form.price(class="form-control",  maxlength="20", type="number") }}
+          {{ form.price(class="form-control custom_input",  maxlength="20", type="number", min="0", value="1") }}
             {% if form.price.errors %}
             {% for error in form.price.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
@@ -39,7 +39,7 @@
         </p>
         <p>
           {{ form.description.label() }}
-          {{ form.description(class="form-control",  maxlength="100") }}
+          {{ form.description(class="form-control custom_input",  maxlength="100") }}
             {% if form.description.errors %}
             {% for error in form.description.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
@@ -50,7 +50,7 @@
         </p>
         <p>
           {{ form.image.label() }}
-          {{ form.image() }}
+          {{ form.image(class="form-control custom_input") }}
             {% if form.image.errors %}
             {% for error in form.image.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
@@ -60,7 +60,7 @@
             {% endif %}
         </p>
         <p>
-          {{ form.submit(class="btn btn-primary mt-3") }}
+          {{ form.submit(class="btn custom_button mt-3") }}
         </p>
         </form>
     </div>

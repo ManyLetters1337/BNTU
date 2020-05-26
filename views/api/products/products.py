@@ -30,6 +30,24 @@ def products_list() -> 'Dict':
     return jsonify([product.serialize() for product in products.items])
 
 
+@api_products.route('/with_purchases', methods=['GET'])
+def product_list_with_purchases():
+    """
+    Get Products List With Numbers Of Purchases
+    :return:
+    """
+    page: int = int(request.args.get('page', default=1))
+    products = services.products.get_all()
+
+    products_list = [product.serialize() for product in products]
+
+    for product in products_list:
+        numbers = services.products.get_numbers_purchases_by_uuid(product['uuid'])
+        product['purchases'] = numbers
+
+    return jsonify(products_list)
+
+
 @api_products.route('/product=<uuid>', methods=['GET'])
 def products_info(uuid: str):
     """

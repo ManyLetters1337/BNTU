@@ -1,3 +1,41 @@
-{% for category in categories %}
-    {{ category.name }}
-{% endfor %}
+{% extends "base.html" %}
+{% block title %}Категории товаров{% endblock %}
+{% block content %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <p>
+          {{ form.name.label() }}
+          {{ form.name(class="form-control custom_input", maxlength="50", style="width: 30%") }}
+            {% if form.name.errors %}
+            {% for error in form.name.errors %}
+            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                <spam class="{{ category }}">{{ error }}</spam>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </p>
+        <p>
+          {{ form.submit(class="btn custom_button mt-3") }}
+        </p>
+    </form>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">Название</th>
+          <th scope="col">Количество товаров</th>
+          <th scope="col">Количество покупок</th>
+        </tr>
+    </thead>
+  <tbody>
+    {% for category, count in categories.items() %}
+        <tr class="category_table_row" onclick="window.location.href='{{ url_for('categories.category_page', uuid=category.uuid) }}'; return false">
+            <td style="cursor: pointer">{{ category.name }}</td>
+            <td style="cursor: pointer">{{ count[0] }}</td>
+            <td style="cursor: pointer">{{ count[1] }}</td>
+        </tr>
+        </a>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

@@ -6,7 +6,7 @@
         {{ form.csrf_token }}
         <p>
           {{ form.country.label() }}
-          {{ form.country(class="form-control",  maxlength="100") }}
+          {{ form.country(class="form-control custom_input",  maxlength="100") }}
             {% if form.country.errors %}
             {% for error in form.country.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
@@ -17,7 +17,7 @@
         </p>
         <p>
           {{ form.city.label() }}
-          {{ form.city(class="form-control",  maxlength="100") }}
+          {{ form.city(class="form-control custom_input",  maxlength="100") }}
             {% if form.city.errors %}
             {% for error in form.city.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
@@ -28,7 +28,7 @@
         </p>
         <p>
           {{ form.address.label() }}
-          {{ form.address(class="form-control",  maxlength="100") }}
+          {{ form.address(class="form-control custom_input",  maxlength="100") }}
             {% if form.address.errors %}
             {% for error in form.address.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
@@ -39,7 +39,7 @@
         </p>
         <p>
           {{ form.post_index.label() }}
-          {{ form.post_index(class="form-control",  maxlength="20") }}    <!-- type='number' style="...."-->
+          {{ form.post_index(class="form-control custom_input",  maxlength="20") }}    <!-- type='number' style="...."-->
             {% if form.post_index.errors %}
             {% for error in form.post_index.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
@@ -49,7 +49,7 @@
             {% endif %}
         </p>
         <p>
-          {{ form.submit(class="btn btn-primary mt-3") }}
+          {{ form.submit(class="btn custom_button mt-3") }}
         </p>
         </form>
     </div>

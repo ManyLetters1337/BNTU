@@ -24,7 +24,35 @@ div.product{
 
 div.product:hover{
   transition: all 0.4s;
-  border: 2px solid green;
+  border: 2px solid #008000;
+}
+
+input.custom_input:focus{
+  transition: all 0.4s;
+  border: 1px solid green;
+  box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.25)
+}
+
+select.custom_select:focus{
+  transition: all 0.4s;
+  border: 1px solid green;
+  box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.25)
+}
+
+.custom_button{
+  transition: all 0.4s;
+  border: 1px solid gray;
+}
+
+.custom_button:hover{
+  transition: all 0.4s;
+  color: white;
+  background-color: green;
+}
+
+tr.category_table_row:hover{
+  transition: all 0.4s;
+  color: green;
 }
 
 img.product_image{
@@ -42,6 +70,10 @@ img.specific_product_image{
 
 .specific_product_name{
   font-family: "Abyssinica SIL";
+}
+
+.specific_category{
+  font-family: cursive;
 }
 
 .specific_product_description{
@@ -72,6 +104,16 @@ img.specific_product_image{
 }
 
 .nav-link:hover {
+  transition: all 0.4s;
+  color: green;
+}
+
+a.logo{
+  color: white;
+}
+
+.admin_table_row:hover{
+  cursor: pointer;
   transition: all 0.4s;
   color: green;
 }

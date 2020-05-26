@@ -23,32 +23,38 @@
                 <hr>
                 <div class="buy_button text-center">
                     {% if not is_added %}
-                        <p><button class="btn btn-primary" value="Buy" name="button">Купить</button></p>
+                        <p><button class="btn custom_button" value="Buy" name="button">Купить</button></p>
                     {% else %}
-                        <p><button class="btn btn-primary" value="Buy" name="button">Удалить из корзины</button></p>
+                        <p><button class="btn custom_button" value="Buy" name="button">Удалить из корзины</button></p>
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
     </form>
-    <form method="POST">
-        {{ comment_form.csrf_token }}
-        <p>
-          {{ comment_form.text.label() }}
-          {{ comment_form.text(class="form-control",  maxlength="100") }}
-            {% if comment_form.text.errors %}
-            {% for error in comment_form.text.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-          {{ comment_form.submit(class="btn btn-primary mt-3", value='Write') }}
-        </p>
-    </form>
+    <div class="row">
+        <div class="col-md-5">
+        </div>
+        <div class="col-md-5">
+            <form method="POST">
+                {{ comment_form.csrf_token }}
+                <p>
+                  {{ comment_form.text.label() }}
+                  {{ comment_form.text(class="form-control custom_input",  maxlength="100", style="width: 50%") }}
+                    {% if comment_form.text.errors %}
+                    {% for error in comment_form.text.errors %}
+                    <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                        <spam class="{{ category }}">{{ error }}</spam>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </p>
+                <p>
+                  {{ comment_form.submit(class="btn custom_button mt-3", value='Write') }}
+                </p>
+            </form>
+        </div>
+    </div>
     <div class="text-center" id="comments">
     </div>
 {% endblock %}
