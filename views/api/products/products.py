@@ -56,8 +56,10 @@ def products_info(uuid: str):
     :return:
     """
     product: 'Products' = services.products.get_by_uuid(uuid)
+    product: 'Dict' = product.serialize()
+    product['purchases'] = services.products.get_numbers_purchases_by_uuid(product['uuid'])
 
-    return jsonify(product.serialize())
+    return jsonify(product)
 
 
 @api_products.route('/product=<uuid>/users', methods=['GET'])

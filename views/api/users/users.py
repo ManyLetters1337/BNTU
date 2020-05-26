@@ -24,7 +24,7 @@ def users_list() -> 'Dict':
     return jsonify([user.serialize() for user in users])
 
 
-@api_users.route('/<uuid>', methods=['GET'])
+@api_users.route('/user=<uuid>', methods=['GET'])
 def user_info(uuid: str):
     """
     Get Information About Specific User

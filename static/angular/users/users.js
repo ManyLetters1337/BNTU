@@ -7,7 +7,7 @@ angular.module('angularApp.users', [
         .state('userInformation', {
             url: '/users/:uuid',
             params: { uuid: null },
-            templateUrl: 'static/angular/users/user/view_user.html',
+            templateUrl: 'static/angular/users/templates/user.html',
             controller: 'UserController'
         })
 })

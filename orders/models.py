@@ -71,7 +71,9 @@ class Orders(db.Model):
             'status': self.status,
             'created_date': self.created_date,
             'products': [product.serialize() for product in self.products],
-            'user_name': self.user.first_name + ' ' + self.user.last_name
+            'user_name': self.user.first_name + ' ' + self.user.last_name,
+            'user_uuid': self.user.uuid,
+            'price': str(self.price)
         }
 
     @property

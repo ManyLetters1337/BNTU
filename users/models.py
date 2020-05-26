@@ -73,6 +73,6 @@ class Users(db.Model, UserMixin):
             'birthday_date': self.birthday_date,
             'about': self.about,
             'role': self.role,
-            'orders': [order.serialize() for order in self.orders]
+            'group': self.groups.number
         }
 

@@ -12,7 +12,7 @@
         <tr class="admin_table_row" ui-sref="productInformation({ uuid: value['uuid'] })">
             <th class="admin_table_element" scope="row">{{ $index + 1 }}</th>
             <td class="admin_table_element" ng-bind="value['name']"></td>
-            <td class="admin_table_element" ng-bind="value['price']"></td>
+            <td class="admin_table_element" ng-bind="value['price'] + '₽'"></td>
             <td class="admin_table_element" ng-bind="value['purchases']"></td>
             <td class="admin_table_element" ng-bind="value['update_date']"></td>
         </tr>

@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row mt-2">
+        <div class="col-sm-2">
+            <h5>Имя, Фамилия:</h5>
+            <h6 class="font- italic" ng-bind="user['first_name'] + ' ' + user['last_name']"></h6>
+            <p>
+            <h5>Группа:</h5>
+            <h6 class="font-italic" ng-bind="user['group']"></h6>
+        </div>
+        <div class="col-sm-3">
+            <h5>Email:</h5>
+            <h6 class="font-italic" ng-bind="user['email']"></h6>
+            <p>
+            <h5>Личный номер:</h5>
+            <h6 class="font-italic" ng-bind="user['student_number']"></h6>
+        </div>
+        <div class="col-sm-3">
+            <div class="p-0 m-0" ng-if="user['birthday_date']">
+                <h5>Дата рождения:</h5>
+                <h6 class="font-italic" ng-bind="user['birthday_date']"></h6>
+                <p>
+            </div>
+            <div class="p-0 m-0" ng-if="user['about']">
+                <h5>О себе:</h5>
+                <h6 class="font-italic" ng-bind="user['about']"></h6>
+            </div>
+        </div>
+    </div>
+    <br>
+<div class="row">
+    <a href ng-click="selector = !selector">Изменить</a>
+    <div class="col-sm-5">
+        <h4>Заказы пользователя:</h4>
+        <table ng-show="selector" class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Created On</th>
+                    <th scope="col">UUID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(key, value) in orders">
+                    <th scope="row">{{ $index + 1 }}</th>
+                    <td ng-bind="value"></td>
+                    <td ng-bind="value['created_on'].slice(4, 16)"></td>
+                    <td ng-bind="value['uuid']"></td>
+                </tr>
+                </tbody>
+        </table>
+    </div>
+</div>

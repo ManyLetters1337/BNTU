@@ -9,6 +9,7 @@ from flask_login import login_required
 from database.service_registry import services
 from orders.models import Orders
 from products.models import Products
+from users.models import Users
 
 api_orders = Blueprint('api_orders', __name__)
 
@@ -50,5 +51,33 @@ def orders_for_product(uuid: str):
     product: 'Products' = services.products.get_by_uuid(uuid)
 
     orders: 'List' = services.orders.get_orders_for_product(product)
+
+    return jsonify([order.serialize() for order in orders])
+
+
+@api_orders.route('/user=<uuid>', methods=['GET'])
+def orders_for_user(uuid: str):
+    """
+    Get Orders For User
+    :param uuid:
+    :return:
+    """
+    user: 'Users' = services.users.get_by_uuid(uuid)
+
+    orders: 'List' = services.orders.get_orders_for_user(user, status='Active')
+
+    return jsonify([order.serialize() for order in orders])
+
+
+@api_orders.route('/user_active=<uuid>', methods=['GET'])
+def active_orders_for_user(uuid: str):
+    """
+    Get Orders For User
+    :param uuid:
+    :return:
+    """
+    user: 'Users' = services.users.get_by_uuid(uuid)
+
+    orders: 'List' = services.orders.get_orders_for_user(user, status='Active')
 
     return jsonify([order.serialize() for order in orders])

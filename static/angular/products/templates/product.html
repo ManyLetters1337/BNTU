@@ -1,53 +1,50 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-2">
+    <div class="row mt-2">
+        <div class="col-sm-4">
             <h5>Название:</h5>
             <h6 class="font-italic" ng-bind="product['name']"></h6>
             <h5>Стоимость:</h5>
-            <h6 class="font-italic" ng-bind="product['price']"></h6>
+            <h6 class="font-italic" ng-bind="product['price']+'₽'"></h6>
             <h5>Дата создания:</h5>
             <h6 class="font-italic" ng-bind="product['create_date']"></h6>
         </div>
-        <div class="col-sm-2">
-            <h5 ng-if="product['project']['description']">Description:</h5>
-            <h6 class="font-italic" ng-if="product['project']['description']" ng-bind="product['project']['description']"></h6>
-            <h5>Created By User:</h5>
-<!--            <a ui-sref="userInformation({ uuid: project['user']['uuid'] })"><h6 class="font-italic" ng-bind="project['user']['username']"></h6></a>-->
-            <h5>Created:</h5>
-            <h6 class="font-italic" ng-bind="product['project']['created_on']"></h6>
+        <div class="col-sm-3">
+            <h5>Количество заказов:</h5>
+            <h6 class="font-italic" ng-bind="product['purchases']"></h6>
+            <h5>Описание:</h5>
+            <h6 class="font-italic" ng-bind="product['description']"></h6>
+        </div>
+        <div class="col-sm-4">
+            <img class="specific_product_image" src="{{product.image}}">
         </div>
     </div>
-    <div class="row">
-        <h4>Notes:</h4>
+    <div class="row mt-5">
+        <h4>В заказах:</h4>
         <table class="table table-sm">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Created On</th>
-                    <th scope="col">UUID</th>
+                    <th scope="col">Пользователь</th>
+                    <th scope="col">Страна</th>
+                    <th scope="col">Город</th>
+                    <th scope="col">Адрес</th>
+                    <th scope="col">Индекс</th>
+                    <th scope="col">Стоимость</th>
+                    <th scope="col">Дата</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="(key, value) in orders">
-                    <th scope="row">{{ $index + 1 }}</th>
-                    <td ng-bind="value"></td>
-                    <td ng-bind="value['status']"></td>
-                    <td ng-bind="value['created_on'].slice(4, 16)"></td>
-                    <td ng-bind="value['uuid']"></td>
+                    <th class="admin_table_element" scope="row">{{ $index + 1 }}</th>
+                    <td class="admin_table_element" ng-bind="value['user_name']"></td>
+                    <td class="admin_table_element" ng-bind="value['country'].slice(0, 15)"></td>
+                    <td class="admin_table_element" ng-bind="value['city'].slice(0, 15)"></td>
+                    <td class="admin_table_element" ng-bind="value['address'].slice(0, 15)"></td>
+                    <td class="admin_table_element" ng-bind="value['post_index']"></td>
+                    <td class="admin_table_element" ng-bind="value['price']+'₽'"></td>
+                    <td class="admin_table_element" ng-bind="value['created_date']"></td>
                 </tr>
             </tbody>
         </table>
     </div>
-        <div class="row">
-            <div class="card-body">
-                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-            </div>
-        </div>
-    </div>
-
-
-
-
 </div>

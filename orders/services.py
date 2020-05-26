@@ -63,13 +63,13 @@ class OrdersDBServices(BaseDBServices):
         """
         return db.session.query(self.model).filter(self.model.products.any(id=product.id)).all()
 
-    def get_orders_for_user(self, user: 'Users') -> 'List':
+    def get_orders_for_user(self, user: 'Users', **kwargs) -> 'List':
         """
         Get Order List for User
         :param user: User Instance
         :return:
         """
-        return db.session.query(self.model).filter(self.model.user == user).all()
+        return db.session.query(self.model).filter(self.model.user == user).filter_by(**kwargs).all()
 
     def get_active_order(self, user: 'User') -> 'Orders':
         """

@@ -48,7 +48,7 @@ CREATE TABLE orders(
     city varchar(50),
     address varchar(100),
     post_index varchar(50),
-    created_date date NOT NULL,
+    created_date datetime NOT NULL,
     status varchar(50) NOT NULL DEFAULT 'Active',
     CONSTRAINT `fk_order_user` FOREIGN KEY (user_id) REFERENCES users (id)
 ) CHARACTER SET utf8;

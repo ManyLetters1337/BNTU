@@ -71,7 +71,8 @@ class Products(db.Model):
             'price': self.price.__str__(),
             'description': self.description,
             'create_date': self.create_date,
-            'update_date': self.update_date
+            'update_date': self.update_date,
+            'image': self.image,
         }
 
 
