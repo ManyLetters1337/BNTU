@@ -17,6 +17,7 @@ angular.module('angularApp.users', [
         let promiseObj = service.getData(CONSTANS_URLS.users);
         promiseObj.then(function (value) {
             $scope.usersData = value;
+            console.log(CONSTANS_URLS.users);
         })
     };
     getUsers();

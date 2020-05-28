@@ -9,7 +9,7 @@ from .models import Comments
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from users.models import User
+    from users.models import User, Users
     from products.models import Products
 
 
@@ -36,3 +36,11 @@ class CommentsDBServices(BaseDBServices):
         :return:
         """
         return db.session.query(self.model).filter_by(product_id=product.id).order_by(db.desc(self.model.create_date))
+
+    def get_for_user(self, user: 'Users'):
+        """
+        Get Comments for User
+        :param user:
+        :return:
+        """
+        return db.session.query(self.model).filter_by(user_id=user.id).all()

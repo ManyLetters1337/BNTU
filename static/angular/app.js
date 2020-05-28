@@ -2,7 +2,7 @@ var App = angular.module('angularApp', [
     'ui.router',
     'angularApp.users',
     'angularApp.products',
-    // 'angularApp.notes',
+    'angularApp.orders',
     // 'angularApp.statistics'
 ]);
 
@@ -27,9 +27,9 @@ angular.module('angularApp')
             templateUrl: 'static/angular/products/templates/products.html'
         })
 
-        // .state('notes', {
-        //     url: '/angular/notes',
-        //     controller: 'NotesController',
-        //     templateUrl: 'static/angular/notes/view_notes_table.html'
-        // })
+        .state('orders', {
+            url: '/orders',
+            controller: 'OrdersController',
+            templateUrl: 'static/angular/orders/templates/orders.html'
+        })
 });

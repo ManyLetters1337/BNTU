@@ -36,6 +36,7 @@
         <div class="col-md-5">
         </div>
         <div class="col-md-5">
+            {% if session['user_id'] %}
             <form method="POST">
                 {{ comment_form.csrf_token }}
                 <p>
@@ -53,6 +54,7 @@
                   {{ comment_form.submit(class="btn custom_button mt-3", value='Написать комментарий') }}
                 </p>
             </form>
+            {% endif %}
         </div>
     </div>
     <div class="text-center" id="comments">

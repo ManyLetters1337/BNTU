@@ -25,7 +25,7 @@ class Orders(db.Model):
     address = db.Column(db.String(100))
     post_index = db.Column(db.String(50))
     status = db.Column(db.String(50), default='Active')
-    created_date = db.Column(db.DateTime(), default=datetime.now)
+    created_date = db.Column(db.DateTime())
     products = db.relationship('Products', secondary=orders_products, back_populates='orders')
 
     def set_uuid(self, uuid_):
@@ -53,7 +53,7 @@ class Orders(db.Model):
         self.address = kwargs['address']           # need refactoring
         self.post_index = kwargs['post_index']
 
-        self.status = 'Paiding'
+        self.status = 'Pending'
 
     def serialize(self) -> Dict:
         """

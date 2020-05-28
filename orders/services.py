@@ -2,6 +2,7 @@
 Database interaction methods for a Orders class
 """
 import uuid
+from datetime import datetime
 
 from database.base_services import BaseDBServices
 from database.core import db
@@ -71,6 +72,21 @@ class OrdersDBServices(BaseDBServices):
         """
         return db.session.query(self.model).filter(self.model.user == user).filter_by(**kwargs).all()
 
+    def get_others_orders_for_user(self, user: 'Users') -> 'List':
+        """
+        Get Order List for User
+        :param user: User Instance
+        :return:
+        """
+        return db.session.query(self.model).filter(self.model.user == user, self.model.status != 'Active').all()
+
+    def get_orders_history(self) -> 'List':
+        """
+        Get Order History
+        :return:
+        """
+        return db.session.query(self.model).filter(self.model.status != 'Active', self.model.status != 'Pending').all()
+
     def get_active_order(self, user: 'User') -> 'Orders':
         """
         Get order with Active status for current USer
@@ -111,6 +127,8 @@ class OrdersDBServices(BaseDBServices):
         :return: Order Instance
         """
         order.set_detail(**kwargs)
+
+        order.created_date = datetime.now()
 
         self.commit()
 

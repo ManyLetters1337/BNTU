@@ -5,7 +5,7 @@ admin = Blueprint('admin', __name__, template_folder='templates', static_folder=
 
 
 @admin.route('/', methods=['GET'])
-# @login_required
+@login_required
 def admin_page():
     """
     View for Admin Page

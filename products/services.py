@@ -193,3 +193,18 @@ class ProductsDBService(BaseDBServices):
             result[category] = numbers
 
         return result
+
+    def get_purchased_products_for_user(self, orders: 'List'):
+        """
+        Get Purchased Products For User
+        :param orders:
+        :return:
+        """
+        result = []
+        for order in orders:
+            products: 'List' = self.get_products_from_order(order)
+
+            for product in products:
+                result.append(product)
+
+        return result

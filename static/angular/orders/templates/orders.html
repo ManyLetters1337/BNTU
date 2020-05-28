@@ -1,0 +1,76 @@
+<div>
+    <a href ng-click="status = !status">
+        <span ng-if="!status">
+            <h4>Ожидающие подтверждения:</h4>
+        </span>
+        <span ng-if="status">
+            <h4>История заказов:</h4>
+        </span>
+    </a>
+    <div ng-show="!status">
+        <div ng-if="ordersData.length == 0">
+            <h4>Заказов нет</h4>
+        </div>
+        <div ng-if="ordersData.length > 0">
+        <table class="table" id="orders">
+            <thead class="thead-inverse">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Имя, Фамилия</th>
+                    <th scope="col">Страна</th>
+                    <th scope="col">Город</th>
+                    <th scope="col">Улица</th>
+                    <th scope="col">Почтовый индекс</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">Дата</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="(key, value) in ordersData">
+                <tr class="admin_table_row" ui-sref="orderInformation({ uuid: value['uuid'] })">
+                    <th class="admin_table_element" scope="row">{{ $index + 1 }}</th>
+                    <td class="admin_table_element" ng-bind="value['user_name']"></td>
+                    <td class="admin_table_element" ng-bind="value['country']"></td>
+                    <td class="admin_table_element" ng-bind="value['city']"></td>
+                    <td class="admin_table_element" ng-bind="value['address']"></td>
+                    <td class="admin_table_element" ng-bind="value['post_index']"></td>
+                    <td class="admin_table_element" ng-bind="value['price'] + '₽'"></td>
+                    <td class="admin_table_element" ng-bind="value['created_date'].slice(4, 22)"></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <div ng-show="status">
+        <div ng-if="ordersHistory.length == 0">
+            <h4>Заказов нет</h4>
+        </div>
+        <div ng-if="ordersHistory.length > 0">
+        <table class="table" id="orders_history">
+            <thead class="thead-inverse">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Имя, Фамилия</th>
+                    <th scope="col">Страна</th>
+                    <th scope="col">Город</th>
+                    <th scope="col">Улица</th>
+                    <th scope="col">Почтовый индекс</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">Дата</th>
+                </tr>
+            </thead>
+                <tbody ng-repeat="(key, value) in ordersHistory">
+                    <tr class="admin_table_row" ui-sref="orderInformation({ uuid: value['uuid'] })">
+                        <th class="admin_table_element" scope="row">{{ $index + 1 }}</th>
+                        <td class="admin_table_element" ng-bind="value['user_name']"></td>
+                        <td class="admin_table_element" ng-bind="value['country']"></td>
+                        <td class="admin_table_element" ng-bind="value['city']"></td>
+                        <td class="admin_table_element" ng-bind="value['address']"></td>
+                        <td class="admin_table_element" ng-bind="value['post_index']"></td>
+                        <td class="admin_table_element" ng-bind="value['price'] + '₽'"></td>
+                        <td class="admin_table_element" ng-bind="value['created_date'].slice(4, 22)"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

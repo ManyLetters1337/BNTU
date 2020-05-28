@@ -1,6 +1,5 @@
 import {Utils} from './Utils.js';
 
-
 $(document).ready(function() {
 	$('.nav-link-collapse').on('click', function() {
 		alert('some');
@@ -8,7 +7,6 @@ $(document).ready(function() {
 		$(this).toggleClass('nav-link-show');
 	});
 });
-
 
 document.addEventListener("DOMContentLoaded", function(event) {
 

@@ -16,9 +16,6 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav sidenav" id="navAccordion">
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link " href="{{ url_for('products.products_list') }}">Товары<span class="sr-only">(current)</span></a>-->
-<!--      </li>-->
       <li class="nav-item">
         <a ui-sref="products" class="nav-link">Товары</a>
       </li>
@@ -26,7 +23,10 @@
         <a ui-sref="users" class="nav-link">Пользователи</a>
       </li>
       <li class="nav-item">
-        <a ui-sref="notes" class="nav-link">Notes</a>
+        <a ui-sref="orders" class="nav-link">Заказы</a>
+      </li>
+    <li class="nav-item active">
+        <a class="nav-link " href="{{ url_for('products.products_list') }}">На сайт<span class="sr-only">(current)</span></a>
       </li>
 <!--      <li class="nav-item">-->
 <!--        <a-->

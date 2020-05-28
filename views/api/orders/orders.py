@@ -64,7 +64,18 @@ def orders_for_user(uuid: str):
     """
     user: 'Users' = services.users.get_by_uuid(uuid)
 
-    orders: 'List' = services.orders.get_orders_for_user(user, status='Active')
+    orders: 'List' = services.orders.get_orders_for_user(user)
+
+    return jsonify([order.serialize() for order in orders])
+
+
+@api_orders.route('/pending', methods=['GET'])
+def pending_products():
+    """
+    Get Pending Orders
+    :return:
+    """
+    orders: 'List' = services.orders.get_all_in_list(status='Pending')
 
     return jsonify([order.serialize() for order in orders])
 
@@ -79,5 +90,31 @@ def active_orders_for_user(uuid: str):
     user: 'Users' = services.users.get_by_uuid(uuid)
 
     orders: 'List' = services.orders.get_orders_for_user(user, status='Active')
+
+    return jsonify([order.serialize() for order in orders])
+
+
+@api_orders.route('/user_others=<uuid>', methods=['GET'])
+def others_orders_for_user(uuid: str):
+    """
+    Get Orders For User
+    :param uuid:
+    :return:
+    """
+    user: 'Users' = services.users.get_by_uuid(uuid)
+
+    orders: 'List' = services.orders.get_others_orders_for_user(user)
+
+    return jsonify([order.serialize() for order in orders])
+
+
+@api_orders.route('/history', methods=['GET'])
+def history_orders_for_user():
+    """
+    Get Order History
+    :param uuid:
+    :return:
+    """
+    orders: 'List' = services.orders.get_orders_history()
 
     return jsonify([order.serialize() for order in orders])

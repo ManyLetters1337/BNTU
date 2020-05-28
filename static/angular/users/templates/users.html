@@ -12,13 +12,12 @@
     </thead>
     <tbody ng-repeat="(key, value) in usersData">
         <tr class="admin_table_row" ui-sref="userInformation({uuid: value['uuid'] })">
-            <th scope="row"
-            >{{ $index + 1 }}</th>
+            <th scope="row">{{ $index + 1 }}</th>
             <td class="admin_table_element" ng-bind="value['first_name'] + ' ' + value['last_name']"></td>
             <td class="admin_table_element" ng-bind="value['email']"></td>
             <td class="admin_table_element" ng-bind="value['group']"></td>
             <td class="admin_table_element" ng-bind="value['student_number']"></td>
-            <td class="admin_table_element" ng-bind="(value['orders'].length)"></td>
+            <td class="admin_table_element" ng-bind="value['orders'].length"></td>
             <td class="admin_table_element" ng-bind="value['role']"></td>
         </tr>
     </tbody>

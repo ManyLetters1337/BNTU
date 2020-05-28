@@ -21,22 +21,25 @@ products = Blueprint('products', __name__, template_folder='templates')
 
 
 @products.route('/product=<uuid>', methods=['GET'])
-@login_required
 def product(uuid: str):
     """
     Product Page
     :return:
     """
-    user: 'Users' = services.users.get_by_id(session['user_id'])
     product_: 'Products' = services.products.get_by_uuid(uuid)
-    order: 'Orders' = services.orders.get_active_order(user)
 
-    if not order:
-        order: 'Orders' = services.orders.create(user)
+    is_added = False
+    comment_form = None
 
-    is_added = services.orders.product_is_added(order, product_)
+    if session.get('user_id'):
+        user: 'Users' = services.users.get_by_id(session['user_id'])
+        order: 'Orders' = services.orders.get_active_order(user)
+        comment_form: 'CommentForm' = CommentForm()
 
-    comment_form: 'CommentForm' = CommentForm()
+        if not order:
+            order: 'Orders' = services.orders.create(user)
+
+        is_added = services.orders.product_is_added(order, product_)
 
     return render_template('product.html', product=product_, is_added=is_added, comment_form=comment_form)
 
@@ -59,7 +62,7 @@ def product_post(uuid: str):
     if request.form.get('button') == 'Buy':
         is_added = services.users.add_product_to_order(user, product_, order_)
 
-    elif comment_form.validate() and request.form.get('submit') == 'Write':
+    elif comment_form.validate() and request.form.get('submit') == 'Написать комментарий':
         comment: 'Comments' = services.comments.create(user, product_, comment_form.text.data)
         comment_form.text.data = ''
 
@@ -69,7 +72,6 @@ def product_post(uuid: str):
 
 
 @products.route('/', methods=['GET'])
-@login_required
 def products_list():
     """
     Page with All Products
