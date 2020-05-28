@@ -79,19 +79,23 @@ img.specific_product_image{
 }
 
 .specific_product_part_title{
-  font-family: cursive;
+  font-family: sans-serif;
+}
+
+hr.line{
+  background-color: #0eb10e;
 }
 
 .specific_product_name{
-  font-family: "Abyssinica SIL";
+  font-family: sans-serif;
 }
 
 .specific_category{
-  font-family: cursive;
+  font-family: sans-serif;
 }
 
 .specific_product_description{
-  font-family: "Abyssinica SIL";
+  font-family: sans-serif;
   max-width: 400px;
 }
 
@@ -136,7 +140,7 @@ a.logo{
 .nav-link-collapse:after {
   float: right;
   content: '\f067';
-  font-family: 'FontAwesome';
+  font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
 }
 
 .nav-link-show:after {
