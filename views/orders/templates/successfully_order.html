@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 {% block title %}Orders{% endblock %}
 {% block content %}
-    <div class="w-25 p-3 mx-auto bg-light border border-primary rounded col-md-4">
-        <h4>Good</h4>
+    <div class="row mt-5">
+        <div class="mx-auto mt-2 text-center">
+            <h4>Ваш заказ был подтверждён</h4>
+            <h4>Администрация магазина свяжется с вами для уточнение информации о доставке</h4>
+            <h4>Ждите сообщение на ваш Email</h4>
+            <a href="{{ url_for('products.products_list') }}"><button class="btn custom_button">Продолжить покупки</button></a>
+            <hr class="line">
+        </div>
+
     </div>
 {% endblock %}
 

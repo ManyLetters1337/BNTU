@@ -119,7 +119,6 @@ def change_product_post(uuid: str):
 
 
 @products.route('/', methods=['GET'])
-@login_required
 def products_list():
     """
     Page with All Products

@@ -93,7 +93,9 @@ def accept_order(uuid: str):
 
     order_: 'Orders' = services.orders.get_by_uuid(uuid)
 
-    return render_template('accept_order.html', form=form, order=order_)
+    products: 'Products' = services.products.get_products_from_order(order_)
+
+    return render_template('accept_order.html', form=form, order=order_, products=products)
 
 
 @orders.route('/oder=<uuid>/accept', methods=['POST'])

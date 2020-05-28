@@ -1,45 +1,47 @@
 {% extends "base.html" %}
-{% block title %}Log In{% endblock %}
+{% block title %}Вход{% endblock %}
 {% block content %}
-    <div class="w-25 p-3 mx-auto bg-light border border-primary rounded col-md-4">
-        <form action="" method="post">
-        {{ form.csrf_token }}
-        <p>
-          {{ form.student_number.label() }}
-          {{ form.student_number(class="form-control",  maxlength="50") }}
-            {% if form.student_number.errors %}
-            {% for error in form.student_number.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
+    <div class="row">
+        <div class="login mx-auto mr-2 rounded p-3">
+            <form action="" method="post">
+            {{ form.csrf_token }}
+            <p>
+              {{ form.student_number.label() }}
+              {{ form.student_number(class="form-control custom_input",  maxlength="50") }}
+                {% if form.student_number.errors %}
+                {% for error in form.student_number.errors %}
+                <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                    <spam class="{{ category }}">{{ error }}</spam>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </p>
+            <p>
+              {{ form.password.label() }}
+              {{ form.password(class="form-control custom_input",  maxlength="20") }}
+                {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                    <spam class="{{ category }}">{{ error }}</spam>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </p>
+            <p>
+            <p>
+                Forgot Your Password?
+                <a href="{{ url_for('auth.send_reset_password_token') }}">Click to Reset It</a>
+            </p>
+            <div class="form-check">
+                {{ form.remember.label() }}
+                {{ form.remember() }}
             </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-          {{ form.password.label() }}
-          {{ form.password(class="form-control",  maxlength="20") }}
-            {% if form.password.errors %}
-            {% for error in form.password.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-        <p>
-            Forgot Your Password?
-            <a href="{{ url_for('auth.send_reset_password_token') }}">Click to Reset It</a>
-        </p>
-        <div class="form-check">
-            {{ form.remember.label() }}
-            {{ form.remember() }}
+            </p>
+            <p>
+              {{ form.submit(class="btn btn-primary mt-3") }}
+            </p>
+            </form>
         </div>
-        </p>
-        <p>
-          {{ form.submit(class="btn btn-primary mt-3") }}
-        </p>
-        </form>
     </div>
 {% endblock %}
 

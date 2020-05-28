@@ -1,73 +1,79 @@
 {% extends "base.html" %}
 {% block title %}Изменить товар{% endblock %}
 {% block content %}
-    <div class="w-25 p-3 mx-auto bg-light border border-primary rounded col-md-4">
-        <form action="" method="post" enctype="multipart/form-data">
-        {{ form.csrf_token }}
-        <p>
-          {{ form.name.label() }}
-          {{ form.name(class="form-control custom_input",  maxlength="50") }}
-            {% if form.name.errors %}
-            {% for error in form.name.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-          {{ form.categories.label() }}
-          {{ form.categories(class="form-control custom_select",  maxlength="20") }}
-            {% if form.categories.errors %}
-            {% for error in form.categories.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-          {{ form.price.label() }}
-            <div class="input-group p-0">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">₽</span>
+    <div class="row">
+        <div class="rounded add_product p-3 mt-3 mx-auto">
+            <form action="" method="post" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <p>
+              {{ form.name.label() }}
+              {{ form.name(class="form-control custom_input", placeholder='Введите название', maxlength="50") }}
+                {% if form.name.errors %}
+                {% for error in form.name.errors %}
+                <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                    <spam class="{{ category }}">{{ error }}</spam>
                 </div>
-          {{ form.price(class="input-group form-control custom_input",  maxlength="20", type="number", min="0") }}
+                {% endfor %}
+                {% endif %}
+            </p>
+            <p>
+              {{ form.categories.label() }}
+              {{ form.categories(class="form-control custom_select", maxlength="20") }}
+                {% if form.categories.errors %}
+                {% for error in form.categories.errors %}
+                <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                    <spam class="{{ category }}">{{ error }}</spam>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </p>
+            <p>
+              {{ form.price.label() }}
+                <div class="input-group p-0">
+              {{ form.price(class="input-group form-control custom_input", placeholder='Введите стоимость',  maxlength="20", type="number", min="0") }}
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2">₽</span>
+                </div>
+                </div>
+                {% if form.price.errors %}
+                {% for error in form.price.errors %}
+                <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                    <spam class="{{ category }}">{{ error }}</spam>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </p>
+            <p>
+              {{ form.description.label() }}
+              {{ form.description(class="form-control custom_input", placeholder='Введите описание', maxlength="200", style="max-height: 100px") }}
+                {% if form.description.errors %}
+                {% for error in form.description.errors %}
+                <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                    <spam class="{{ category }}">{{ error }}</spam>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </p>
+            <p>
+              {{ form.image.label() }}
+                <br>
+              {{ form.image(class="custom_input") }}
+                {% if form.image.errors %}
+                {% for error in form.image.errors %}
+                <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                    <spam class="{{ category }}">{{ error }}</spam>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </p>
+            <hr class="line">
+            <div class="row">
+                <div class="mx-auto">
+                  {{ form.submit(class="btn custom_button mt-3", value='Изменить товар') }}
+                </div>
             </div>
-            {% if form.price.errors %}
-            {% for error in form.price.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-          {{ form.description.label() }}
-          {{ form.description(class="form-control custom_input",  maxlength="100") }}
-            {% if form.description.errors %}
-            {% for error in form.description.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-          {{ form.image.label() }}
-          {{ form.image(class="input-group") }}
-            {% if form.image.errors %}
-            {% for error in form.image.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-          {{ form.submit(class="btn custom_button mt-3", value='Изменить') }}
-        </p>
-        </form>
+            </form>
+        </div>
     </div>
 {% endblock %}
 

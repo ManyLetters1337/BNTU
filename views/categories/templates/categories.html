@@ -5,7 +5,7 @@
         {{ form.csrf_token }}
         <p>
           {{ form.name.label() }}
-          {{ form.name(class="form-control custom_input", maxlength="50", style="width: 30%") }}
+          {{ form.name(class="form-control custom_input", placeholder='Введите название категории', maxlength="50", style="width: 30%") }}
             {% if form.name.errors %}
             {% for error in form.name.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">

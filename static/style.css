@@ -24,6 +24,38 @@ div.product{
   text-overflow: ellipsis;
 }
 
+div.accept_product{
+  border: 1px solid darkgray;
+}
+
+div.add_product{
+  border: 1px solid darkgray;
+}
+
+div.login{
+  border: 1px solid darkgray;
+}
+
+div.login:hover{
+  transition: all 0.4s;
+  border: 2px solid #008000;
+}
+
+span.mini_line:hover{
+  transition: all 0.2s;
+  color: green;
+}
+
+div.add_product:hover{
+  transition: all 0.4s;
+  border: 2px solid #008000;
+}
+
+div.accept_product:hover{
+  transition: all 0.4s;
+  border: 2px solid #008000;
+}
+
 div.product:hover{
   transition: all 0.4s;
   border: 2px solid #008000;

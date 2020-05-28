@@ -13,7 +13,7 @@ CREATE TABLE products(
     image varchar(300) NOT NULL default 'https://res.cloudinary.com/manyletters/image/upload/v1589568700/015e96e6a653950ded808f5704c0727f.jpg',
     category_id INT UNSIGNED NOT NULL,
     price DECIMAL UNSIGNED NOT NULL,
-    description varchar(100) NOT NULL,
+    description varchar(200) NOT NULL,
     create_date datetime NOT NULL,
     update_date datetime NOT NULL,
     CONSTRAINT `fk_product_category` FOREIGN KEY (category_id) REFERENCES categories (id)

@@ -6,9 +6,9 @@
         <a class="" style="text-decoration: none" href="{{ url_for('products.product', uuid=product.uuid) }}">
         <div class="product p-3 m-2 rounded">
                 <h6 class="text-center" style="text-overflow: ellipsis">{{ product.name }}</h6>
-                <hr>
+                <hr class="line">
                 <img class="product_image rounded m-0 mr-2 ml-2" src="{{ product.image }}">
-                <hr>
+                <hr class="line">
                 <div class="product_price text-center">{{ product.price }}<span>₽</span></div>
         </div>
         </a>

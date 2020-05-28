@@ -10,5 +10,5 @@ class AddCategoryForm(FlaskForm):
     """
     Add Category Form
     """
-    name = StringField("Name", validators=[DataRequired(), length(2, 100)])
-    submit = SubmitField()
+    name = StringField("Название", validators=[DataRequired(), length(2, 100)])
+    submit = SubmitField('Добавить категорию')

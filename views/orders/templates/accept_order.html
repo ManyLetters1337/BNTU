@@ -1,57 +1,68 @@
 {% extends "base.html" %}
-{% block title %}Add Product{% endblock %}
+{% block title %}Подтвердить заказ{% endblock %}
 {% block content %}
-    <div class="w-25 p-3 mx-auto bg-light border border-primary rounded col-md-4">
-        <form action="" method="post" enctype="multipart/form-data">
-        {{ form.csrf_token }}
-        <p>
-          {{ form.country.label() }}
-          {{ form.country(class="form-control custom_input",  maxlength="100") }}
-            {% if form.country.errors %}
-            {% for error in form.country.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
+    <div class="row">
+        <div class="mx-auto accept_product rounded col-md-3 p-3">
+             <div class="text-center">
+            <h5>Товаров в корзине: {{ products|length }}</h5>
+            {% if order.status != 'Pending' %}
+                <h5>На общую стоимость: {{ order.price }}₽</h5>
             {% endif %}
-        </p>
-        <p>
-          {{ form.city.label() }}
-          {{ form.city(class="form-control custom_input",  maxlength="100") }}
-            {% if form.city.errors %}
-            {% for error in form.city.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
+        </div>
+            <hr class="line">
+            <form action="" method="post" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <p>
+              {{ form.country.label() }}
+              {{ form.country(class="form-control custom_input", placeholder='Введите страну', maxlength="100") }}
+                {% if form.country.errors %}
+                {% for error in form.country.errors %}
+                <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                    <spam class="{{ category }}">{{ error }}</spam>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </p>
+            <p>
+              {{ form.city.label() }}
+              {{ form.city(class="form-control custom_input", placeholder='Введите город', maxlength="100") }}
+                {% if form.city.errors %}
+                {% for error in form.city.errors %}
+                <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                    <spam class="{{ category }}">{{ error }}</spam>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </p>
+            <p>
+              {{ form.address.label() }}
+              {{ form.address(class="form-control custom_input", placeholder='Введите адрес', maxlength="100") }}
+                {% if form.address.errors %}
+                {% for error in form.address.errors %}
+                <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                    <spam class="{{ category }}">{{ error }}</spam>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </p>
+            <p>
+              {{ form.post_index.label() }}
+              {{ form.post_index(class="form-control custom_input", placeholder='Введите почтовый индекс',  maxlength="20") }}    <!-- type='number' style="...."-->
+                {% if form.post_index.errors %}
+                {% for error in form.post_index.errors %}
+                <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                    <spam class="{{ category }}">{{ error }}</spam>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </p>
+            <div class="row">
+                <div class="mx-auto">
+                    {{ form.submit(class="btn custom_button mt-3", value='Подвердить заказ') }}
+                </div>
             </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-          {{ form.address.label() }}
-          {{ form.address(class="form-control custom_input",  maxlength="100") }}
-            {% if form.address.errors %}
-            {% for error in form.address.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-          {{ form.post_index.label() }}
-          {{ form.post_index(class="form-control custom_input",  maxlength="20") }}    <!-- type='number' style="...."-->
-            {% if form.post_index.errors %}
-            {% for error in form.post_index.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-          {{ form.submit(class="btn custom_button mt-3") }}
-        </p>
-        </form>
+            </form>
+        </div>
     </div>
 {% endblock %}
 

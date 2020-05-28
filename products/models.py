@@ -30,7 +30,7 @@ class Products(db.Model):
     image = db.Column(db.String(300))
     category_id = db.Column(db.Integer(), db.ForeignKey('categories.id'))
     price = db.Column(db.DECIMAL(10, 2), nullable=False)
-    description = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
     create_date = db.Column(db.DateTime(), default=datetime.now)
     update_date = db.Column(db.DateTime())
     users = db.relationship('Users', secondary=products_users, back_populates='products')

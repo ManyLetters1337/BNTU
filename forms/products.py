@@ -5,7 +5,7 @@ import datetime
 from flask import flash
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileRequired
-from wtforms import StringField, SubmitField, BooleanField, SelectField, DecimalField, FileField
+from wtforms import StringField, SubmitField, BooleanField, SelectField, DecimalField, FileField, TextAreaField
 from wtforms.validators import DataRequired, Email, ValidationError, length, EqualTo
 from database.service_registry import services
 from forms.validators import only_letters, only_numbers
@@ -38,9 +38,9 @@ class AddProductForm(FlaskForm):
     name = StringField("Название", validators=[DataRequired(), length(4, 100)])
     categories = SelectField("Категория", validators=[DataRequired()], coerce=int)
     price = DecimalField("Цена", validators=[DataRequired()])
-    description = StringField("Описание", validators=[DataRequired(), length(4, 100)])
+    description = TextAreaField("Описание", validators=[DataRequired(), length(4, 100)])
     image = FileField("Изображение", validators=[FileAllowed(photos, 'Только изображение!')])
-    submit = SubmitField('Добавить')
+    submit = SubmitField('Добавить товар')
 
 
 def check_user_in_db(form, student_number_field):
