@@ -21,12 +21,19 @@
                     <h5 class="specific_product_part_title">Стоимость:</h5>
                     <h5 class="">{{ product.price }}<span>₽</span></h5>
                 <hr>
-                <div class="buy_button text-center">
-                    {% if not is_added %}
-                        <p><button class="btn custom_button" value="Buy" name="button">Купить</button></p>
-                    {% else %}
-                        <p><button class="btn custom_button" value="Buy" name="button">Удалить из корзины</button></p>
-                    {% endif %}
+                <div class="row">
+                    <div class="buy_button col-sm-6 text-center">
+                        {% if not is_added %}
+                            <p><button class="btn custom_button" value="Buy" name="button">Купить</button></p>
+                        {% else %}
+                            <p><button class="btn custom_button" value="Buy" name="button">Удалить из корзины</button></p>
+                        {% endif %}
+                    </div>
+                    <div class="buy_button col-sm-2 text-center">
+                        {% if session['role'] == 'admin' %}
+                            <button class="btn custom_button" name="button" value="Change">Изменить</button>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Добавить товар{% endblock %}
+{% block title %}Изменить товар{% endblock %}
 {% block content %}
     <div class="w-25 p-3 mx-auto bg-light border border-primary rounded col-md-4">
         <form action="" method="post" enctype="multipart/form-data">
@@ -55,7 +55,7 @@
         </p>
         <p>
           {{ form.image.label() }}
-          {{ form.image(class="form-control custom_input") }}
+          {{ form.image(class="input-group") }}
             {% if form.image.errors %}
             {% for error in form.image.errors %}
             <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
@@ -65,7 +65,7 @@
             {% endif %}
         </p>
         <p>
-          {{ form.submit(class="btn custom_button mt-3") }}
+          {{ form.submit(class="btn custom_button mt-3", value='Изменить') }}
         </p>
         </form>
     </div>

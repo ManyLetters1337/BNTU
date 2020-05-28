@@ -1,6 +1,8 @@
 """
 Database interaction methods for a Products class
 """
+from decimal import Decimal
+
 from database.base_services import BaseDBServices
 from database.core import db
 from typing import TYPE_CHECKING, Dict
@@ -40,14 +42,16 @@ class ProductsDBService(BaseDBServices):
         :param kwargs:
         :return: Product Instance
         """
-        if kwargs['price'] and product.price != kwargs['price']:
-            product.price = kwargs['price']
+        if kwargs['price'] and product.price != Decimal(kwargs['price']):
+            product.price = Decimal(kwargs['price'])
         if kwargs['description'] and product.description != kwargs['description']:
             product.description = kwargs['description']
-        if kwargs['category_id'] and product.category_id != kwargs['category_id']:
-            product.category_id = kwargs['category_id']
+        if kwargs['category_id'] and product.category_id != int(kwargs['category_id']):
+            product.category_id = int(kwargs['category_id'])
         if kwargs['name'] and product.name != kwargs['name']:
             product.name = kwargs['name']
+        if kwargs['image'] and product.image != kwargs['image']:
+            product.image = kwargs['image']
 
         self.commit()
 
