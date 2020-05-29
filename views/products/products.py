@@ -130,6 +130,22 @@ def products_list():
     return render_template('products.html', products=services.products.apply_pagination(products_, page, page_size))
 
 
+@products.route('/', methods=['POST'])
+def products_list_post():
+    """
+    Page with All Products
+    :return:
+    """
+    page: int = int(request.args.get('page', default=1))
+    products_ = services.products.get_all()
+
+    if request.form.get('Search'):
+        search_products = services.products.search(request.form.get('Search'))
+        return render_template('search_result.html', products=search_products)
+
+    return render_template('products.html', products=services.products.apply_pagination(products_, page, page_size))
+
+
 @products.route('/add_product', methods=['GET'])
 @login_required
 def add_product():

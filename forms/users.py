@@ -41,10 +41,10 @@ class LoginForm(FlaskForm):
     """
     Login Form for User
     """
-    student_number = StringField("Student Number", validators=[DataRequired(), validate_student_number, only_numbers, length(4, 100)])
-    password = PasswordField("Password", validators=[DataRequired(), validate_user_password, length(6, 30)])
-    remember = BooleanField("Remember me")
-    submit = SubmitField()
+    student_number = StringField("Студенческий номер", validators=[DataRequired(), validate_student_number, only_numbers, length(4, 100)])
+    password = PasswordField("Пароль", validators=[DataRequired(), validate_user_password, length(6, 30)])
+    remember = BooleanField("Запомнить меня")
+    submit = SubmitField('Войти')
 
 
 def check_user_in_db(form, student_number_field):
@@ -116,14 +116,14 @@ class RegistrationForm(FlaskForm):
     """
     Registration Form for User
     """
-    first_name = StringField("First Name", validators=[DataRequired(), only_letters, length(2, 100)])
-    last_name = StringField("Last Name", validators=[DataRequired(), only_letters, length(2, 100)])
+    first_name = StringField("Имя", validators=[DataRequired(), only_letters, length(2, 100)])
+    last_name = StringField("Фамилия", validators=[DataRequired(), only_letters, length(2, 100)])
     email = StringField("Email", validators=[DataRequired(), Email(), length(4, 100), check_email_in_db])
-    group = SelectField("Group Number", coerce=int)
-    student_number = StringField("Student ID number", validators=[DataRequired(), check_user_in_db, only_numbers, length(4, 100)])
-    password = PasswordField("Password", validators=[DataRequired(), validate_password_content, length(6, 30)])
-    password_repeat = PasswordField("Repeat Password", validators=[DataRequired(), EqualTo('password'), length(6, 30)])
-    submit = SubmitField()
+    group = SelectField("Номер Группы", coerce=int)
+    student_number = StringField("Номер студентческого", validators=[DataRequired(), check_user_in_db, only_numbers, length(4, 100)])
+    password = PasswordField("Пароль", validators=[DataRequired(), validate_password_content, length(6, 30)])
+    password_repeat = PasswordField("Повторите пароль", validators=[DataRequired(), EqualTo('password'), length(6, 30)])
+    submit = SubmitField("Зарегистрироваться")
 
 
 def validate_user_existing(form, email_field):

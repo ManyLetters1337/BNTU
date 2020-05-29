@@ -2,7 +2,6 @@ import {Utils} from './Utils.js';
 
 $(document).ready(function() {
 	$('.nav-link-collapse').on('click', function() {
-		alert('some');
 		$('.nav-link-collapse').not(this).removeClass('nav-link-show');
 		$(this).toggleClass('nav-link-show');
 	});

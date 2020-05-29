@@ -41,6 +41,15 @@ div.login:hover{
   border: 2px solid #008000;
 }
 
+div.registration{
+  border: 1px solid darkgray;
+}
+
+div.registration:hover{
+  transition: all 0.4s;
+  border: 2px solid #008000;
+}
+
 span.mini_line:hover{
   transition: all 0.2s;
   color: green;

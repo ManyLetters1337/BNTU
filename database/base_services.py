@@ -32,6 +32,14 @@ class BaseDBServices:
         """
         return db.session.query(self.model).filter_by(id=id_).first()
 
+    def search(self, value: str):
+        """
+        Search Item
+        :param value:
+        :return:
+        """
+        return db.session.query(self.model).filter(self.model.name.like('%' + value + '%')).all()
+
     def get_by_uuid(self, uuid_: str) -> db.Model:
         """
         Get instance by uuid

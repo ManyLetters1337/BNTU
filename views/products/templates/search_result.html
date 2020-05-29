@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Результаты поиска{% endblock %}
+{% block content %}
+    <div class="row">
+        {% if products|length > 0 %}
+            {% for product in products %}
+            <a class="" style="text-decoration: none" href="{{ url_for('products.product', uuid=product.uuid) }}">
+            <div class="product p-3 m-2 rounded">
+                    <h6 class="text-center" style="text-overflow: ellipsis">{{ product.name }}</h6>
+                    <hr class="line">
+                    <img class="product_image rounded m-0 mr-2 ml-2" src="{{ product.image }}">
+                    <hr class="line">
+                    <div class="product_price text-center">{{ product.price }}<span>₽</span></div>
+            </div>
+            </a>
+        {% endfor %}
+        {% else %}
+            <div class="mx-auto text-center">
+                <h5>Товары не найдены</h5>
+            </div>
+         {% endif %}
+    </div>
+<div class="container mt-4 mx-auto col-md-4">
+	<nav class="">
+  <ul class="pagination">
+	  {% if products.has_prev %}
+    <li class="page-item"><a class="page-link custom_link" href="{{ url_for('products.products_list', page = products.prev_num) }}">Previous</a></li>
+    <li class="page-item"><a class="page-link custom_link" href="{{ url_for('products.products_list', page = products.prev_num) }}">{{ products.prev_num }}</a></li>
+    <li class="page-item"><a class="page-link custom_link" href="{{ url_for('products.products_list', page = products.page ) }}">{{ products.page }}</a></li>
+	  {% elif products.has_next %}
+	  <li class="page-item" style=""><a class="page-link custom_link" href="{{ url_for('products.products_list', page = products.page) }}">Previous</a></li>
+	  <li class="page-item"><a class="page-link custom_link" href="{{ url_for('products.products_list', page = products.page ) }}">{{ products.page }}</a></li>
+	  {% else %}
+	  {% endif %}
+	  {% if products.has_next %}
+    <li class="page-item"><a class="page-link custom_link" href="{{ url_for('products.products_list', page = products.next_num) }}">{{ products.next_num }}</a></li>
+    <li class="page-item"><a class="page-link custom_link" href="{{ url_for('products.products_list', page = products.next_num) }}">Next</a></li>
+	  {% endif %}
+  </ul>
+</nav>
+</div>
+{% endblock %}
+

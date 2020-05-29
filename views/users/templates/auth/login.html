@@ -2,12 +2,12 @@
 {% block title %}Вход{% endblock %}
 {% block content %}
     <div class="row">
-        <div class="login mx-auto mr-2 rounded p-3">
+        <div class="login mx-auto rounded p-3">
             <form action="" method="post">
             {{ form.csrf_token }}
             <p>
               {{ form.student_number.label() }}
-              {{ form.student_number(class="form-control custom_input",  maxlength="50") }}
+              {{ form.student_number(class="form-control custom_input", placeholder='Номер студенческого',  maxlength="50") }}
                 {% if form.student_number.errors %}
                 {% for error in form.student_number.errors %}
                 <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
@@ -18,7 +18,7 @@
             </p>
             <p>
               {{ form.password.label() }}
-              {{ form.password(class="form-control custom_input",  maxlength="20") }}
+              {{ form.password(class="form-control custom_input", placeholder='Введите пароль',  maxlength="20") }}
                 {% if form.password.errors %}
                 {% for error in form.password.errors %}
                 <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
@@ -27,19 +27,23 @@
                 {% endfor %}
                 {% endif %}
             </p>
-            <p>
-            <p>
-                Forgot Your Password?
-                <a href="{{ url_for('auth.send_reset_password_token') }}">Click to Reset It</a>
-            </p>
-            <div class="form-check">
-                {{ form.remember.label() }}
-                {{ form.remember() }}
+            <div class="row">
+                <div class="col-md-8">
+                    {{ form.remember.label() }}
+                </div>
+                <div class="col-md-3">
+                    {{ form.remember() }}
+                </div>
             </div>
-            </p>
-            <p>
-              {{ form.submit(class="btn btn-primary mt-3") }}
-            </p>
+            <hr class="line">
+            <div class="">
+                <a href="{{ url_for('auth.send_reset_password_token') }}">Забыли пароль?</a>
+            </div>
+            <div class="row">
+                <div class="mx-auto">
+                    {{ form.submit(class="btn custom_button mt-3") }}
+                </div>
+            </div>
             </form>
         </div>
     </div>

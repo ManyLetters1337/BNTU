@@ -1,90 +1,93 @@
 {% extends "base.html" %}
-{% block title %}Sign Up{% endblock %}
+{% block title %}Регистрация{% endblock %}
 {% block content %}
-<div class="w-25 p-3 mx-auto bg-light border border-primary rounded col-md-4">
-    <form action="" method="post">
-        {{ form.csrf_token }}
-        <p>
-            {{ form.first_name.label() }}
-            {{ form.first_name(class="form-control", maxlength="50") }}
-            {% if form.first_name.errors %}
-            {% for error in form.first_name.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
+<div class="row">
+    <div class="mx-auto registration p-3 rounded">
+        <form action="" method="post">
+            <div class="row">
+                {{ form.csrf_token }}
+                <div class="col-md-6">
+                    {{ form.first_name.label() }}
+                    {{ form.first_name(class="form-control", placeholder='Введите имя', maxlength="50") }}
+                    {% if form.first_name.errors %}
+                    {% for error in form.first_name.errors %}
+                    <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                        <spam class="{{ category }}">{{ error }}</spam>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <p></p>
+                    {{ form.last_name.label() }}
+                    {{ form.last_name(class="form-control", placeholder='Фамилию', maxlength="50") }}
+                    {% if form.last_name.errors %}
+                    {% for error in form.last_name.errors %}
+                    <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                        <spam class="{{ category }}">{{ error }}</spam>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <p></p>
+                    {{ form.group.label() }}
+                    {{ form.group(class="form-control", maxlength="50") }}
+                    {% if form.group.errors %}
+                    {% for error in form.group.errors %}
+                    <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                        <spam class="{{ category }}">{{ error }}</spam>
+                    </div>
+                {% endfor %}
+                {% endif %}
+                </div>
+                <div class="col-md-6">
+                    {{ form.password_repeat.label() }}
+                    {{ form.password_repeat(class="form-control", placeholder='Введите пароль', maxlength="20") }}
+                    {% if form.password_repeat.errors %}
+                    {% for error in form.password_repeat.errors %}
+                    <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                        <spam class="{{ category }}">{{ error }}</spam>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <p></p>
+                    {{ form.password.label() }}
+                    {{ form.password(class="form-control", placeholder='Введите пароль', maxlength="20") }}
+                    {% if form.password.errors %}
+                    {% for error in form.password.errors %}
+                    <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                        <spam class="{{ category }}">{{ error }}</spam>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <p></p>
+                    {{ form.student_number.label() }}
+                    {{ form.student_number(class="form-control", placeholder='Введите номер', maxlength="50") }}
+                    {% if form.student_number.errors %}
+                    {% for error in form.student_number.errors %}
+                    <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                        <spam class="{{ category }}">{{ error }}</spam>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
             </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-            {{ form.last_name.label() }}
-            {{ form.last_name(class="form-control", maxlength="50") }}
-            {% if form.last_name.errors %}
-            {% for error in form.last_name.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-            {{ form.email.label() }}
-            {{ form.email(class="form-control", maxlength="50") }}
-            {% if form.email.errors %}
-            {% for error in form.email.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-            {{ form.group.label() }}
-            {{ form.group(class="form-control", maxlength="50") }}
-            {% if form.group.errors %}
-            {% for error in form.group.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-            {{ form.student_number.label() }}
-            {{ form.student_number(class="form-control", maxlength="50") }}
-            {% if form.student_number.errors %}
-            {% for error in form.student_number.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-            {{ form.password.label() }}
-            {{ form.password(class="form-control", maxlength="20") }}
-            {% if form.password.errors %}
-            {% for error in form.password.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-            {{ form.password_repeat.label() }}
-            {{ form.password_repeat(class="form-control", maxlength="20") }}
-            {% if form.password_repeat.errors %}
-            {% for error in form.password_repeat.errors %}
-            <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
-                <spam class="{{ category }}">{{ error }}</spam>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-            {{ form.submit(class="btn btn-primary mt-3") }}
-        </p>
-    </form>
+            <p></p>
+                    {{ form.email.label() }}
+                    {{ form.email(class="form-control", placeholder='Введите Email', maxlength="50") }}
+                    {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                    <div class="alert alert-danger mx-auto p-3 mt-3" role="alert">
+                        <spam class="{{ category }}">{{ error }}</spam>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+            <hr class="line mb-0">
+                <div class="row">
+                    <div class="mx-auto">
+                        {{ form.submit(class="btn custom_button mt-3") }}
+                    </div>
+                </div>
+        </form>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
