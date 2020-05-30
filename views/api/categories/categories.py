@@ -1,7 +1,7 @@
 """
 Api For Categories
 """
-from flask import Blueprint, jsonify, session, request
+from flask import Blueprint, jsonify, session, request, url_for
 from typing import TYPE_CHECKING
 from config import page_size
 from database.service_registry import services
@@ -38,3 +38,19 @@ def products_in_category(uuid: str):
     products: 'Products' = services.products.get_product_with_category(category)
 
     return jsonify([product.serialize() for product in products])
+
+
+@api_categories.route('/active_categories', methods=['GET'])
+def get_active_categories():
+    """
+    Get Active Categories
+    :return:
+    """
+    categories: 'List' = services.categories.get_categories_with_products()
+
+    categories_list = [category.serialize() for category in categories]
+
+    for category in categories_list:
+        category['url'] = url_for('categories.category_page', uuid=category['uuid'])
+
+    return jsonify(categories_list)

@@ -123,6 +123,18 @@ img.specific_product_image{
   font-family: sans-serif;
 }
 
+.submenu {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  background-color: white;
+}
+
+.topmenu li:hover .submenu {
+  display: block;
+}
+
+
 hr.line{
   background-color: #0eb10e;
 }
@@ -180,7 +192,7 @@ a.logo{
 
 .nav-link-collapse:after {
   float: right;
-  content: '\f067';
+  content: '\25BC';
   font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
 }
 

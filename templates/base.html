@@ -44,33 +44,13 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto sidenav" id="navAccordion">
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ url_for('products.products_list') }}">Каталог<span class="sr-only">(current)</span></a>
+    <ul class="navbar-nav mr-auto topmenu sidenav" id="navAccordion">
+      <li class="nav-item">
+        <a class="nav-link nav-link-collapse" href="{{ url_for('products.products_list') }}">Каталог<span class="sr-only"></span></a>
+        <ul class="nav-second-level submenu collapse pl-5" id="subMenu" data-parent="#navAccordion">
+
+        </ul>
       </li>
-<!--      <li class="nav-item">-->
-<!--        <a-->
-<!--          class="nav-link nav-link-collapse"-->
-<!--          href="#"-->
-<!--          id="hasSubItems"-->
-<!--          data-toggle="collapse"-->
-<!--          data-target="#collapseSubItems2"-->
-<!--          aria-controls="collapseSubItems2"-->
-<!--          aria-expanded="false"-->
-<!--        >Item 2</a>-->
-<!--        <ul class="nav-second-level collapse" id="collapseSubItems2" data-parent="#navAccordion">-->
-<!--          <li class="nav-item">-->
-<!--            <a class="nav-link" href="#">-->
-<!--              <span class="nav-link-text">Item 2.1</span>-->
-<!--            </a>-->
-<!--          </li>-->
-<!--          <li class="nav-item">-->
-<!--            <a class="nav-link" href="#">-->
-<!--              <span class="nav-link-text">Item 2.2</span>-->
-<!--            </a>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </li>-->
         {% if session['user_id'] %}
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('orders.active_order') }}">Корзина</a>

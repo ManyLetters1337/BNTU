@@ -39,3 +39,10 @@ class CategoriesDBServices(BaseDBServices):
             result[category] = [products_count, products_buy_count]
 
         return result
+
+    def get_categories_with_products(self):
+        """
+        Get Categories what's include some Products
+        :return:
+        """
+        return db.session.query(self.model).filter(self.model.products.any()).all()

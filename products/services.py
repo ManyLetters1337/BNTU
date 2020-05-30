@@ -9,7 +9,9 @@ from typing import TYPE_CHECKING, Dict
 from .models import Products
 from categories.models import Categories
 from orders.models import Orders
+from config import STATUSES
 import uuid
+
 
 if TYPE_CHECKING:
     from typing import List
@@ -148,7 +150,7 @@ class ProductsDBService(BaseDBServices):
         :param uuid_: Product UUID
         :return:
         """
-        orders: 'List' = db.session.query(Orders).filter_by(status='Paiding').all()
+        orders: 'List' = db.session.query(Orders).filter_by(status=STATUSES['Pending']).all()
         product: 'Products' = self.get_by_uuid(uuid_)
 
         numbers = 0
@@ -164,7 +166,7 @@ class ProductsDBService(BaseDBServices):
         Get Product Buyer Statistics
         :return:
         """
-        orders: 'List' = db.session.query(Orders).filter_by(status='Paiding').all()
+        orders: 'List' = db.session.query(Orders).filter_by(status=STATUSES['Pending']).all()
         products: 'List' = self.get_all_in_list()
 
         result = {}
