@@ -31,6 +31,7 @@ CREATE TABLE users(
     first_name varchar(100) NOT NULL,
     last_name varchar(100) NOT NULL,
     email varchar (100) NOT NULL UNIQUE,
+    image varchar(300) NOT NULL default 'https://res.cloudinary.com/manyletters/image/upload/v1589568700/015e96e6a653950ded808f5704c0727f.jpg',
     group_id INT UNSIGNED NOT NULL,
     student_number varchar(50) NOT NULL,
     password_hash varchar(100) NOT NULL,

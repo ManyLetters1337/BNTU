@@ -119,6 +119,28 @@ img.specific_product_image{
   max-height: 350px;
 }
 
+div.image{
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 50%;
+  background-size: auto 300px;
+}
+
+div.comment_image{
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  background-size: auto 100px;
+}
+
+
+img.specific_user_image{
+  width: 110%;
+  height: 100%;
+}
+
 .specific_product_part_title{
   font-family: sans-serif;
 }

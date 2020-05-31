@@ -21,6 +21,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 					let comment_info = data[comment_key]
 
+					let image = document.createElement('img')
+					image.src = comment_info.user.image;
+
+					let image_div = document.createElement('div')
+					image_div.classList = 'comment_image'
+
+					image_div.append(image)
+
 					let div = document.createElement('div')
 					div.classList = 'border rounded mb-2 p-3';
 
@@ -30,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					let comment_text = document.createTextNode(comment_info.text);
 
 					h5.append(user_name)
+					div.append(image_div)
 					div.append(h5);
 					div.append(comment_text);
 

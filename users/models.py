@@ -23,6 +23,7 @@ class Users(db.Model, UserMixin):
     email = db.Column(db.String(100), nullable=False, unique=True)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
+    image = db.Column(db.String(300))
     group_id = db.Column(db.Integer, db.ForeignKey('groups.id'))
     student_number = db.Column(db.String(50), nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
@@ -74,6 +75,7 @@ class Users(db.Model, UserMixin):
             'about': self.about,
             'role': self.role,
             'group': self.groups.number,
+            'image': self.image,
             'orders': [order.serialize() for order in self.orders]
         }
 

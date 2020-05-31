@@ -1,7 +1,41 @@
 {% extends "base.html" %}
-{% block title %}My Page{% endblock %}
+{% block title %}Мой Профиль{% endblock %}
 {% block content %}
-    {{ user.first_name }}
-    {{ user.last_name }}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="image">
+                <img class="specific_user_image" src="{{ user.image }}">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div>
+                <h6>Имя:</h6>
+                <h5>{{ user.first_name }}</h5>
+                <h6>Фамилия:</h6>
+                <h5>{{ user.last_name }}</h5>
+                <h6>Дата рождение:</h6>
+                {% if user.birthday_date %}
+                    <h5>{{ user.birthday_date }}</h5>
+                {% else %}
+                    <h5>Не установлена</h5>
+                {% endif %}
+            </div>
+            <h5>О себе:</h5>
+            <div class="row ml-2">
+                <h6>{{ user.about }}</h6>
+            </div>
+            <div class="button">
+                <a href="{{ url_for('users.user_add_info_page', uuid=user.uuid) }}"><button class="btn custom_button">Добавить информацию</button></a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <h6>Email:</h6>
+            <h5>{{ user.email }}</h5>
+            <h6>Студенческий номер:</h6>
+            <h5>{{ user.student_number }}</h5>
+            <h6>Номер группы:</h6>
+            <h5>{{ group.number }}</h5>
+        </div>
+    </div>
 {% endblock %}
 

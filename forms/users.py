@@ -4,9 +4,12 @@ Forms for User
 import datetime
 from flask import flash
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, BooleanField, PasswordField, DateField, SelectField
+from flask_wtf.file import FileField, FileAllowed
+from wtforms import StringField, SubmitField, BooleanField, PasswordField, DateField, SelectField, TextAreaField
 from werkzeug.security import check_password_hash
 from wtforms.validators import DataRequired, Email, ValidationError, length, EqualTo
+
+from config import photos
 from database.service_registry import services
 from forms.validators import only_letters, only_numbers
 
@@ -124,6 +127,16 @@ class RegistrationForm(FlaskForm):
     password = PasswordField("Пароль", validators=[DataRequired(), validate_password_content, length(6, 30)])
     password_repeat = PasswordField("Повторите пароль", validators=[DataRequired(), EqualTo('password'), length(6, 30)])
     submit = SubmitField("Зарегистрироваться")
+
+
+class AddInfoForm(FlaskForm):
+    """
+    Add Additional Info For User
+    """
+    birthday_date = DateField("Дата рождения", validators=[DataRequired()])
+    about = TextAreaField("О себе")
+    image = FileField("Изображение", validators=[FileAllowed(photos, 'Только изображение!')])
+    submit = SubmitField("Подтвердить")
 
 
 def validate_user_existing(form, email_field):
