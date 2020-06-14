@@ -194,15 +194,25 @@ hr.line{
 }
 
 .nav-link{
-  /*border-top: 1px solid #a8a5a5;*/
+  display: block;
+  background-image: linear-gradient(to left,transparent,transparent 50%,green 50%,green);
+  background-position: 100% 0;
+  background-size: 200% 100%;
+  transition: all .25s ease-in;
 }
 
 .nav-link:hover {
   transition: all 0.4s;
-  color: green;
+  background-position: 0 0;
+  color:#fff;
 }
 
 a.logo{
+  color: black;
+}
+
+a.logo:hover {
+  transition: all 0.4s;
   color: white;
 }
 
@@ -221,20 +231,30 @@ a.logo{
 .nav-link-show:after {
   float: right;
   content: '\f068';
-  font-family: 'FontAwesome';
 }
 
-.nav-item ul.nav-second-level {
-  padding-left: 0;
+.nav-item ul.nav-second-level li {
+  list-style-type: none;
 }
 
 .nav-item ul.nav-second-level > .nav-item {
-  padding-left: 20px;
+}
+
+ul.pagination a.custom_link {
+  color: black;
+}
+
+ul.pagination a.custom_link:hover{
+  color: white;
 }
 
 nav.navbar {
     background: white;
-    border-bottom: 1px solid black;
+
+}
+
+nav.navbar.navbar_top{
+  background: linear-gradient(45deg, #009000, white);
 }
 
 @media (min-width: 990px) {
@@ -244,10 +264,9 @@ nav.navbar {
     left: 0;
     width: 200px;
     height: calc(100vh - 3.5rem);
-    margin-top: 3.5rem;
+    margin-top: 4rem;
     background: white;
     box-sizing: border-box;
-    border-right: 1px solid black;
   }
 
   .nav-link{
