@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="container-fluid">
+    <div class="p-3 mx-auto rounded col-md-4">
+        <div class="text-center">
+            <div ng-if="order['status'] == 'Adopted'">
+                <h5>Заказ отправлен</h5>
+            </div>
+            <div ng-if="order['status'] != 'Adopted'">
+                <h5>Товаров в заказе: {{ order['products'].length }}</h5>
+                <h5>На общую стоимость: {{ order['price'] }}₽</h5>
+            </div>
+            <hr class="line">
+            <h5>Адрес доставки: {{ order['country'] }}, {{ order['city'] }}, {{ order['address'] }} </h5>
+            <h5>Почтовый индекс: {{ order['post_index'] }}</h5>
+            <hr class="line">
+            <h5>Покупатель: {{ order['user_name'] }}</h5>
+            <div ng-if="order['status'] != 'Adopted'">
+                <a ng-click="changeStatus()"><button class="btn custom_button">Подтвердить заказ</button></a>
+            </div>
+        </div>
+    </div>
+    <hr class="line">
+    <div class="row d-inline-flex" ng-repeat="(key, value) in products">
+        <a class="" style="text-decoration: none" ng-href="{{ product_url + value['uuid'] }}">
+        <div class="product p-3 m-4 rounded">
+            <h6 class="text-center" style="text-overflow: ellipsis">{{ value['name'] }}</h6>
+            <hr class="line">
+            <img class="product_image rounded m-0 mr-2 ml-2" src="{{ value['image'] }}">
+            <hr class="line">
+            <div class="product_price text-center">{{ value['price'] }}<span>₽</span></div>
+        </div>
+        </a>
+    </div>
+</div>

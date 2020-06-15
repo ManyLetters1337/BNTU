@@ -3,25 +3,16 @@ angular.module('products.product', [
 ])
 
 .controller('ProductController', function ($http, $scope, $stateParams, CONSTANS_URLS, service) {
-    function getProduct (url) {
+    function getInformation (url, data) {
         let promiseObj = service.getData(url);
         promiseObj.then(function (value){
-            $scope.product = value;
+            $scope[data] = value;
         })
     }
 
-    function getOrdersForProduct (url) {
-        let promiseObj = service.getData(url);
-        promiseObj.then(function (value){
-            $scope.orders = value;
-        })
-    }
+    getInformation(CONSTANS_URLS.product + $stateParams['uuid'], 'product');
 
-    console.log(CONSTANS_URLS.orders_for_product + $stateParams['uuid']);
-
-    getProduct(CONSTANS_URLS.product + $stateParams['uuid']);
-
-    getOrdersForProduct(CONSTANS_URLS.orders_for_product + $stateParams['uuid'])
+    getInformation(CONSTANS_URLS.orders_for_product + $stateParams['uuid'], 'orders')
 
     function getCanvas() {
         return document.getElementById('donutChart').getContext('2d');

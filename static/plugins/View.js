@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 					let image = document.createElement('img')
 					image.src = comment_info.user.image;
+					image.height = 100;
+					image.width = 100;
 
 					let image_div = document.createElement('div')
 					image_div.classList = 'comment_image'

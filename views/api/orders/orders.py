@@ -1,7 +1,7 @@
 """
 Api For Orders
 """
-from flask import Blueprint, jsonify, session, request
+from flask import Blueprint, jsonify, session, request, redirect, url_for
 from typing import TYPE_CHECKING
 
 from flask_login import login_required
@@ -109,7 +109,7 @@ def others_orders_for_user(uuid: str):
 
 
 @api_orders.route('/history', methods=['GET'])
-def history_orders_for_user():
+def history_orders():
     """
     Get Order History
     :param uuid:
@@ -118,3 +118,32 @@ def history_orders_for_user():
     orders: 'List' = services.orders.get_orders_history()
 
     return jsonify([order.serialize() for order in orders])
+
+
+@api_orders.route('/order=<uuid>/products', methods=['GET'])
+def products_for_order(uuid: str):
+    """
+    Get Products For Order
+    :param uuid:
+    :return:
+    """
+    order: 'Orders' = services.orders.get_by_uuid(uuid)
+
+    products: 'List' = services.products.get_products_for_order(order)
+
+    return jsonify([product.serialize() for product in products])
+
+
+@api_orders.route('/order=<uuid>/accept', methods=['POST'])
+def accept_order(uuid: str):
+    """
+    Accept Order
+    :param uuid:
+    :return:
+    """
+    if request.method == 'POST':
+        order: 'Orders' = services.orders.accept_order(uuid)
+
+        return 'Changed'
+
+    return 'Error'

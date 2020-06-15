@@ -13,5 +13,6 @@ basic_image_url = 'https://res.cloudinary.com/manyletters/image/upload/v15895687
 
 STATUSES = {
     'Pending': 'Pending',
-    'Active':'Active'
+    'Active': 'Active',
+    'Adopted': 'Adopted'
 }

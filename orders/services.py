@@ -43,6 +43,18 @@ class OrdersDBServices(BaseDBServices):
 
         return order
 
+    def accept_order(self, uuid_: str):
+        """
+        Accept Order
+        :param uuid_:
+        :return:
+        """
+        order = self.get_by_uuid(uuid_)
+
+        order.accept()
+
+        self.commit()
+
     def delete_product(self, order: 'Orders', product: 'Products') -> 'Orders':
         """
         Delete product from Order

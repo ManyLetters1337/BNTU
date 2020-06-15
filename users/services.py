@@ -28,7 +28,8 @@ class UsersDBService(BaseDBServices):
         :return:
         """
         user: 'Users' = super().new(group_id=group.id, email=kwargs['email'], first_name=kwargs['first_name'],
-                                    last_name=kwargs['last_name'], student_number=kwargs['student_number']
+                                    last_name=kwargs['last_name'], student_number=kwargs['student_number'],
+                                    image=kwargs['image']
                                     )
         user.set_password(kwargs['password'])
         user.set_uuid(uuid.uuid1().__str__())
@@ -36,6 +37,20 @@ class UsersDBService(BaseDBServices):
         self.commit()
 
         return user
+
+    def update_info(self, user: 'Users', image: str, about_info: str, birthday_date):
+        """
+        Update User Info
+        :return:
+        """
+        if image:
+            user.set_image(image)
+        if about_info:
+            user.set_about_info(about_info)
+        if birthday_date:
+            user.set_birthday_date(birthday_date)
+
+        self.commit()
 
     def get_by_email(self, email: str) -> 'Users':
         """

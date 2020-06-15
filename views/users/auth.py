@@ -6,6 +6,8 @@ from typing import TYPE_CHECKING
 from click import BOOL
 from flask_login import login_user, login_required, logout_user
 from flask import request, url_for, render_template, redirect, Blueprint, flash, session
+
+from config import photos, basic_image_url
 from create_app import login_manager
 from database.service_registry import services
 from forms.users import LoginForm, RegistrationForm, ResetPasswordForm, ResetPasswordRequestForm
@@ -95,7 +97,9 @@ def registration_post():
         user: 'Users' = services.users.create(services.groups.get_by_id(form.group.data),
                                               first_name=form.first_name.data,
                                               last_name=form.last_name.data, email=form.email.data,
-                                              student_number=form.student_number.data, password=form.password.data)
+                                              student_number=form.student_number.data, password=form.password.data,
+                                              image=basic_image_url)
+
         order_: 'Orders' = services.orders.create(user)
         # send_mail.apply_async(args=[form.email.data])
         return redirect(request.args.get('next') or url_for('products.products_list'))

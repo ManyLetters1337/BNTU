@@ -23,3 +23,9 @@ class Groups(db.Model):
             'users': [user.serialize() for user in self.users]
         }
 
+    def set_uuid(self, uuid_):
+        """
+        Set products uuid
+        :param uuid_:
+        """
+        self.uuid = uuid_

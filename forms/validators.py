@@ -24,6 +24,6 @@ def only_numbers(form, field):
     :param field: Field from Form
     """
     if not field.data.isdigit():
-        message = "Field must contain only numbers"
+        message = "Поле должно содержать только цифры"
         flash(message)
         raise ValidationError(message)

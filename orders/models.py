@@ -2,6 +2,8 @@
 Orders class
 """
 from typing import Dict
+
+from config import STATUSES
 from database.core import db
 from datetime import datetime
 import uuid
@@ -34,6 +36,13 @@ class Orders(db.Model):
         :param uuid_:
         """
         self.uuid = uuid_
+
+    def accept(self):
+        """
+        Change Status to Accept
+        :return:
+        """
+        self.status = STATUSES['Adopted']
 
     def set_user(self, user_):
         """

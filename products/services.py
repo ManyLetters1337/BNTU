@@ -128,6 +128,14 @@ class ProductsDBService(BaseDBServices):
         """
         return db.session.query(self.model).filter(self.model.users.any(id=user.id)).all()
 
+    def get_products_for_order(self, order: 'Orders') -> 'List':
+        """
+        Get Products List for specific User
+        :param order: Order Instance
+        :return:
+        """
+        return db.session.query(self.model).filter(self.model.orders.any(id=order.id)).all()
+
     def get_products_from_order(self, order: 'Orders'):
         """
         Get product from specific order
@@ -150,7 +158,7 @@ class ProductsDBService(BaseDBServices):
         :param uuid_: Product UUID
         :return:
         """
-        orders: 'List' = db.session.query(Orders).filter_by(status=STATUSES['Pending']).all()
+        orders: 'List' = db.session.query(Orders).filter_by(status=STATUSES['Adopted']).all()
         product: 'Products' = self.get_by_uuid(uuid_)
 
         numbers = 0

@@ -25,6 +25,8 @@ angular.module('angularApp.products', [
 
     };
 
+    console.log(CONSTANS_URLS.products_with_purchases);
+
     getProjects();
 
 });

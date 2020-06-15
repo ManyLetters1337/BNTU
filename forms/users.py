@@ -134,8 +134,8 @@ class AddInfoForm(FlaskForm):
     Add Additional Info For User
     """
     birthday_date = DateField("Дата рождения", validators=[DataRequired()])
-    about = TextAreaField("О себе")
-    image = FileField("Изображение", validators=[FileAllowed(photos, 'Только изображение!')])
+    about = TextAreaField("О себе", validators=[DataRequired()])
+    image = FileField("Изображение", validators=[DataRequired(), FileAllowed(photos, 'Только изображение!')])
     submit = SubmitField("Подтвердить")
 
 

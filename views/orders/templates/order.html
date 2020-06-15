@@ -4,10 +4,16 @@
     <div class="p-3 mx-auto rounded col-md-4">
         <div class="text-center">
             <h5>Товаров в корзине: {{ products|length }}</h5>
-            {% if order.status != 'Pending' %}
+            {% if order.status != 'Pending' and order.status != 'Adopted' and  products|length > 0 %}
                 <h5>На общую стоимость: {{ order.price }}₽</h5>
+                <a href="{{ url_for('orders.accept_order', uuid=order.uuid) }}"><button class="btn custom_button">Подтвердить заказ </button></a>
             {% endif %}
-            <a href="{{ url_for('orders.accept_order', uuid=order.uuid) }}"><button class="btn custom_button">Подтвердить заказ </button></a>
+            {% if order.status == 'Pending' %}
+                <h5>Заказ обрабатывается администратором</h5>
+            {% endif %}
+            {% if order.status == 'Adopted' %}
+                <h5>Заказ отправлен</h5>
+            {% endif %}
         </div>
     </div>
     <hr class="line">

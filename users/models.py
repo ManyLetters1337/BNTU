@@ -23,7 +23,7 @@ class Users(db.Model, UserMixin):
     email = db.Column(db.String(100), nullable=False, unique=True)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
-    image = db.Column(db.String(300))
+    image = db.Column(db.String(300), nullable=False)
     group_id = db.Column(db.Integer, db.ForeignKey('groups.id'))
     student_number = db.Column(db.String(50), nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
@@ -48,6 +48,33 @@ class Users(db.Model, UserMixin):
         :param password:
         """
         self.password_hash = generate_password_hash(password)
+
+    def set_image(self, image: str):
+        """
+        Set User Image
+        :param image:
+        :return:
+        """
+        if self.image != image:
+            self.image = image
+
+    def set_about_info(self, info: str):
+        """
+        Set About Info
+        :param info:
+        :return:
+        """
+        if self.about != info:
+            self.about = info
+
+    def set_birthday_date(self, birthday_date):
+        """
+        Set Date
+        :param birthday_date:
+        :return:
+        """
+        if self.birthday_date != birthday_date:
+            self.birthday_date = birthday_date
 
     def get_reset_password_token(self, expire_in=600):
         """

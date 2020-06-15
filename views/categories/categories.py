@@ -1,5 +1,5 @@
 """
-Views for Note Class
+Views for Categories Class
 """
 # from config import page_size
 from typing import Dict
