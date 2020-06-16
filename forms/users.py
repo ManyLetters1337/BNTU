@@ -157,13 +157,13 @@ class ResetPasswordRequestForm(FlaskForm):
     Form for Send Request to Reset User Password
     """
     email = StringField("Email", validators=[DataRequired(), Email(), length(6, 100), validate_user_existing])
-    submit = SubmitField()
+    submit = SubmitField("Отправить")
 
 
 class ResetPasswordForm(FlaskForm):
     """
     Form for Reset Password
     """
-    password = PasswordField("Password", validators=[DataRequired(), validate_password_content, length(6, 30)])
-    password_repeat = PasswordField("Repeat Password", validators=[DataRequired(), EqualTo('password'), length(6, 30)])
-    submit = SubmitField()
+    password = PasswordField("Пароль", validators=[DataRequired(), validate_password_content, length(6, 30, "Длина должна быть от 6 до 30 символов")])
+    password_repeat = PasswordField("Повторите пароль", validators=[DataRequired(), EqualTo('password', 'Поля должны совпадать'), length(6, 30)])
+    submit = SubmitField("Подвердить")

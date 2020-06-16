@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING
 
 from flask_login import login_required
 
+from celery_tasks import send_mail_accept_order
 from database.service_registry import services
 from orders.models import Orders
 from products.models import Products
@@ -143,6 +144,9 @@ def accept_order(uuid: str):
     """
     if request.method == 'POST':
         order: 'Orders' = services.orders.accept_order(uuid)
+        user: 'Users' = services.users.get_by_id(order.user.id)
+
+        send_mail_accept_order.apply_async(args=[user.serialize(), order.serialize()])
 
         return 'Changed'
 

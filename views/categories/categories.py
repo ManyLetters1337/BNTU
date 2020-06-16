@@ -18,7 +18,6 @@ categories = Blueprint('categories', __name__, template_folder='templates')
 
 
 @categories.route('/category=<uuid>', methods=['GET'])
-@login_required
 def category_page(uuid: str):
     """
     Category Page

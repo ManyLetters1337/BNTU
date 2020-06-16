@@ -55,6 +55,8 @@ class OrdersDBServices(BaseDBServices):
 
         self.commit()
 
+        return order
+
     def delete_product(self, order: 'Orders', product: 'Products') -> 'Orders':
         """
         Delete product from Order

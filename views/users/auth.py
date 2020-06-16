@@ -7,6 +7,7 @@ from click import BOOL
 from flask_login import login_user, login_required, logout_user
 from flask import request, url_for, render_template, redirect, Blueprint, flash, session
 
+from celery_tasks import send_reset_password_email
 from config import photos, basic_image_url
 from create_app import login_manager
 from database.service_registry import services
@@ -128,7 +129,7 @@ def send_reset_password_token_post():
         user: 'Users' = services.users.get_by_email(form.email.data)
         token = user.get_reset_password_token()
         url = url_for('auth.reset_password', token=token, _external=True)
-        # send_reset_password_email.apply_async(args=[user.email, user.first_name, url])
+        send_reset_password_email.apply_async(args=[user.serialize(), url])
 
         flash("Check your email for the instructions to reset your password")
 

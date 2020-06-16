@@ -76,7 +76,7 @@ class Users(db.Model, UserMixin):
         if self.birthday_date != birthday_date:
             self.birthday_date = birthday_date
 
-    def get_reset_password_token(self, expire_in=600):
+    def get_reset_password_token(self, expire_in=900):
         """
         Get Reset Password Token for User
         @param expire_in:

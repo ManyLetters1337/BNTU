@@ -1,0 +1,12 @@
+<h3>Уважаемый {{ user['first_name'] }} {{ user['last_name'] }}</h3>
+<h4>
+    Ваш заказ успешно отправлен. Спасибо за покупку.
+</h4>
+<h3>Информация о заказе:</h3>
+<p><i>Сумма заказа: {{ order['price'] }}₽</i></p>
+<p><i>Количество товаро в корзине: {{ order['products']|length }}</i></p>
+<p><i>Адресс доставки: {{ order['country'] }}, {{ order['city'] }}, {{ order['address'] }}</i></p>
+
+<h4>С уважением администрация магазина БНТУ</h4>
+
+<img src="https://pbs.twimg.com/media/DpinJaJW0AYhqAT.jpg:large" style="width: 200px; height: 200px; border-radius: 10px;">

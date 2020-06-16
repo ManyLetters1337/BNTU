@@ -2,8 +2,12 @@
 Database interaction methods for a User class
 """
 from click import BOOL
+import jwt
+from flask import render_template
 from sqlalchemy.orm.exc import NoResultFound
 from werkzeug.exceptions import NotFound
+
+from config import secret_key
 from database.base_services import BaseDBServices
 from database.core import db
 from typing import TYPE_CHECKING
@@ -52,6 +56,32 @@ class UsersDBService(BaseDBServices):
 
         self.commit()
 
+    def verify_reset_password_token(self, token):
+        """
+        Verify reset password token and return user Instance
+        @param token: Reset Password Token
+        @return: User Instance
+        """
+        try:
+            id_ = jwt.decode(token, secret_key, algorithms=['HS256'])['reset_password']
+        except jwt.ExpiredSignature as e:
+            raise jwt.ExpiredSignatureError()
+
+        return self.get_by_id_or_none(id_)
+
+    def reset_password(self, user: 'Users', password: str):
+        """
+        Change User Password
+        @param user:
+        @param password:
+        @return:
+        """
+        user.set_password(password)
+
+        self.commit()
+
+        return user
+
     def get_by_email(self, email: str) -> 'Users':
         """
         Get User by Email
@@ -77,7 +107,7 @@ class UsersDBService(BaseDBServices):
     def get_password_hash(self, uuid_: str) -> 'password_hash':
         """
         Get password_hash for user
-        :param uuid: User uuid
+        :param uuid_: User uuid
         :return: Password_hash
         """
         try:
