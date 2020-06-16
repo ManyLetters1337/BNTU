@@ -174,7 +174,7 @@ class ProductsDBService(BaseDBServices):
         Get Product Buyer Statistics
         :return:
         """
-        orders: 'List' = db.session.query(Orders).filter_by(status=STATUSES['Pending']).all()
+        orders: 'List' = db.session.query(Orders).filter_by(status=STATUSES['Adopted']).all()
         products: 'List' = self.get_all_in_list()
 
         result = {}
